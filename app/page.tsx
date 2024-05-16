@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import "@fontsource/archivo"; // Add this line
 
 import { colors } from "../styles/colors";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronRight, FaChevronLeft, FaChevronDown } from "react-icons/fa";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -22,9 +22,21 @@ export default async function Index() {
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">test</div>
       <div className={`w-4/6 ${colors.primary.default} p-4 h-full`}>
-        <div>
+        <div className="flex flex-row w-full justify-between items-center">
           <button
-            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-xs font-inter font-medium rounded-sm font-archivo`}
+            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
+          >
+            <FaChevronLeft className="mr-1" />
+            Revelation
+          </button>
+          <button
+            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
+          >
+            Genesis
+            <FaChevronDown className="ml-1" />
+          </button>
+          <button
+            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
           >
             Exodus
             <FaChevronRight className="ml-1" />
