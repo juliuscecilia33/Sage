@@ -24,8 +24,10 @@ export default async function Index() {
   return (
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">test</div>
-      <div className="w-4/6 bg-red-500 h-full">test</div>
-      <div className="w-1/6 bg-blue-500 h-full">test</div>
+      <div className={`w-4/6 ${colors.primary.default} h-full`}>
+        <p className={`${colors.primary.default}`}>test</p>
+      </div>
+      <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
     </div>
 
     // <div className="flex-1 w-full flex flex-col gap-20 items-center">

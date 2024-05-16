@@ -15,11 +15,9 @@ module.exports = {
           DEFAULT: "#000000", // Text color
           bg: "#FBFCFD", // Background color
         },
-        accentPrimary: {
-          DEFAULT: "#956E60", // Text color, Brown
-        },
-        accentSecondary: {
-          DEFAULT: "#B5B5B5", // Text color, Gray
+        accent: {
+          light: "#FFD133",
+          dark: "#3357FF",
         },
         background: "#FFFFFF",
         foreground: "#FBFCFD",

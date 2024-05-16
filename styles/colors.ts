@@ -1,17 +1,9 @@
 export const colors = {
   primary: {
-    text: "text-primary",
-    bg: "bg-primary",
+    default: "bg-white text-black",
   },
   secondary: {
-    text: "text-secondary",
-    bg: "bg-secondary",
-  },
-  accentPrimary: {
-    text: "text-accentPrimary",
-  },
-  accentSecondary: {
-    text: "text-accentSecondary",
+    default: "bg-[#FBFCFD] text-black",
   },
   // Add more color variables as needed
 } as const;
