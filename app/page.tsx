@@ -1,16 +1,11 @@
-import DeployButton from "../components/DeployButton";
-import AuthButton from "../components/AuthButton";
 import { createClient } from "@/utils/supabase/server";
-import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
-import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
-import Header from "@/components/Header";
+import "@fontsource/archivo"; // Add this line
 
 import { colors } from "../styles/colors";
+import { FaChevronRight } from "react-icons/fa";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
-    // This function is just for the interactive tutorial.
-    // Feel free to remove it once you have Supabase connected.
     try {
       createClient();
       return true;
@@ -19,13 +14,22 @@ export default async function Index() {
     }
   };
 
+  console.log("here are the colors:", colors.button.default);
+
   const isSupabaseConnected = canInitSupabaseClient();
 
   return (
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">test</div>
-      <div className={`w-4/6 ${colors.primary.default} h-full`}>
-        <p className={`${colors.primary.default}`}>test</p>
+      <div className={`w-4/6 ${colors.primary.default} p-4 h-full`}>
+        <div>
+          <button
+            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-xs font-inter font-medium rounded-sm font-archivo`}
+          >
+            Exodus
+            <FaChevronRight className="ml-1" />
+          </button>
+        </div>
       </div>
       <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
     </div>
