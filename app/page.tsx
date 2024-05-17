@@ -2,7 +2,7 @@ import { createClient } from "@/utils/supabase/server";
 import "@fontsource/archivo"; // Add this line
 
 import { colors } from "../styles/colors";
-import { FaChevronRight, FaChevronLeft, FaChevronDown } from "react-icons/fa";
+import Navbar from "@/containers/Main/Navbar";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -14,34 +14,15 @@ export default async function Index() {
     }
   };
 
-  console.log("here are the colors:", colors.button.default);
-
   const isSupabaseConnected = canInitSupabaseClient();
 
   return (
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">test</div>
-      <div className={`w-4/6 ${colors.primary.default} p-4 h-full`}>
-        <div className="flex flex-row w-full justify-between items-center">
-          <button
-            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
-          >
-            <FaChevronLeft className="mr-1" />
-            Revelation
-          </button>
-          <button
-            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
-          >
-            Genesis
-            <FaChevronDown className="ml-1" />
-          </button>
-          <button
-            className={`flex justify-center items-center mb-10 px-4 py-1.5 ${colors.button.default} text-sm font-inter font-medium rounded-sm font-archivo`}
-          >
-            Exodus
-            <FaChevronRight className="ml-1" />
-          </button>
-        </div>
+      <div
+        className={`w-4/6 p-4 h-1/4 border-b-2 border-[#F0F0F0] ${colors.primary.default}`}
+      >
+        <Navbar />
       </div>
       <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
     </div>

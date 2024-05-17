@@ -7,6 +7,7 @@ export const colors = {
   },
   button: {
     default: "bg-[#FEF2EE] text-[#956E60]",
+    secondary: "bg-[#FBFCFD] text-[#B5B5B5]",
   },
   // Add more color variables as needed
 } as const;
