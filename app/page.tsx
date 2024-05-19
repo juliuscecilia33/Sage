@@ -2,7 +2,8 @@ import { createClient } from "@/utils/supabase/server";
 import "@fontsource/archivo"; // Add this line
 
 import { colors } from "../styles/colors";
-import Navbar from "@/containers/Main/Navbar";
+import Navbar from "../components/Main/Navbar";
+import Hero from "@/components/Main/Hero";
 
 export default async function Index() {
   const canInitSupabaseClient = () => {
@@ -23,6 +24,7 @@ export default async function Index() {
         className={`w-4/6 p-4 h-1/4 border-b-2 border-[#F0F0F0] ${colors.primary.default}`}
       >
         <Navbar />
+        <Hero bookTitle="Genesis" chapterCount={6} />
       </div>
       <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
     </div>
