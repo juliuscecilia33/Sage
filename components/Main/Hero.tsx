@@ -1,7 +1,12 @@
 import { colors } from "../../styles/colors";
+
+// Icons
 import { FaChevronDown } from "react-icons/fa";
 import { IoMdUndo } from "react-icons/io";
 import { IoMdRedo } from "react-icons/io";
+import { FaBookBible } from "react-icons/fa6";
+import { CgNotes } from "react-icons/cg";
+import { MdStickyNote2 } from "react-icons/md";
 
 type HeroProps = {
   bookTitle: string;
@@ -36,16 +41,27 @@ const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
           <button className="text-[#B5B5B5] pr-5 border-r border-[#F0F0F0]">
             <IoMdRedo size={20} />
           </button>
-          <div className="flex flex-row items-center font-medium px-5 border-r border-[#F0F0F0] font-archivo text-[#956E60]">
+          <button className="flex flex-row items-center font-medium px-5 border-r border-[#F0F0F0] font-archivo text-[#956E60]">
             <p>Helvetica</p>
             <FaChevronDown className="ml-2" />
-          </div>
+          </button>
+          <button className="flex flex-row items-center font-medium px-5 border-r border-[#F0F0F0] font-archivo text-[#956E60]">
+            <MdStickyNote2 className="mr-2" size={28} />
+            <p>Sticky</p>
+          </button>
         </div>
-        <button
-          className={`border border-[#956E60] flex justify-center items-center px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FEF2EE] text-[#956E60]`}
-        >
-          Exodus
-        </button>
+        <div className="flex flex-row items-center">
+          <button
+            className={`mr-3 border border-[#956E60] flex justify-center items-center p-2 text-sm font-inter font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
+          >
+            <FaBookBible />
+          </button>
+          <button
+            className={`transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#B5B5B5] flex justify-center items-center p-2 text-sm font-inter font-medium rounded font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
+          >
+            <CgNotes />
+          </button>
+        </div>
       </div>
     </div>
   );
