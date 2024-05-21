@@ -21,7 +21,7 @@ export default async function Index() {
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">test</div>
       <div
-        className={`w-4/6 p-4 h-1/4 border-b-2 border-[#F0F0F0] ${colors.primary.default}`}
+        className={`w-4/6 p-4 h-1/4 border-b border-[#F0F0F0] ${colors.primary.default}`}
       >
         <Navbar />
         <Hero bookTitle="Genesis" chapterCount={6} />
