@@ -15,9 +15,11 @@ type HeroProps = {
 
 const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
   return (
-    <div className="flex flex-col mt-4">
+    <div className="flex flex-col mt-4 pb-4 px-4 border-b border-[#F0F0F0]">
       <div className="flex flex-row w-full justify-between items-center">
-        <h2 className="font-semibold text-3xl text-black ">{bookTitle}</h2>
+        <h2 className="font-semibold text-3xl text-black font-archivo">
+          {bookTitle}
+        </h2>
         <div className="flex flex-row items-center">
           <button
             className={`flex justify-center items-center px-4 mr-3 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo ${colors.button.secondary}`}

@@ -1,4 +1,5 @@
-import { GeistSans } from "geist/font/sans";
+import { Archivo } from "next/font/google";
+
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -11,13 +12,17 @@ export const metadata = {
   description: "Bible Notetaking App",
 };
 
+const archivo = Archivo({
+  subsets: ["latin"],
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={`${archivo.className}`}>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col items-center">
           {children}
