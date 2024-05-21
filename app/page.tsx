@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/server";
 import "@fontsource/archivo"; // Add this line
 
-import { colors } from "../styles/colors";
+import { colors } from "../utils/colors";
 import Navbar from "../components/Main/Navbar";
 import Hero from "@/components/Main/Hero";
 
