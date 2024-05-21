@@ -21,14 +21,16 @@ module.exports = {
         },
         background: "#FFFFFF",
         foreground: "#FBFCFD",
-        btn: {
-          background: "#FEF2EE",
-          "background-hover": "hsl(var(--btn-background-hover))",
-        },
       },
       fontFamily: {
         archivo: ["Archivo"],
       },
+    },
+  },
+  variants: {
+    extend: {
+      backgroundColor: ["responsive", "hover", "focus", "active"],
+      textColor: ["responsive", "hover", "focus", "active"],
     },
   },
   plugins: [],
