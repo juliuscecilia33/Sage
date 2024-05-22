@@ -5,13 +5,14 @@ import { colors } from "../utils/colors";
 import Navbar from "../components/Main/Navbar";
 import Hero from "@/components/Main/Hero";
 import axios, { AxiosResponse } from "axios";
+import "@fontsource/archivo";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 
 import {
-  saveDataToSessionStorage,
-  getDataFromSessionStorage,
-} from "../utils/sessionStorage";
+  saveDataToLocalStorage,
+  getDataFromLocalStorage,
+} from "../utils/localStorage";
 
 interface VerseData {
   book: string;
@@ -23,26 +24,51 @@ interface VerseData {
 export default function Index() {
   const [verseData, setVerseData] = useState<any>();
 
-  const fetchVerseData = async (params: VerseData) => {
+  const fetchVerseData = async (key: string, params: VerseData) => {
     try {
+      // Try to get data from sessionStorage
+      const storedData: any = getDataFromLocalStorage(key);
+      if (storedData) {
+        console.log("stored data from local session: ", storedData);
+        setVerseData(storedData);
+        return storedData;
+      }
       const response: AxiosResponse<any> = await axios.get("/api/bible", {
         params,
       });
       setVerseData(response.data);
-      console.log("Verse Data: ", response.data);
+      saveDataToLocalStorage(key, response.data);
+      console.log("Verse Data not from local session: ", response.data);
+      return response.data;
     } catch (error) {
       console.error("Error fetching verse data:", error);
     }
+  };
+
+  const generateKey = (
+    version: string,
+    book: string,
+    chapter: number,
+    verse: number
+  ): string => {
+    return `${version}-${book}-${chapter}-${verse}`;
   };
 
   useEffect(() => {
     const params: VerseData = {
       version: "en-kjv",
       book: "john",
-      chapter: 3,
+      chapter: 4,
       verse: 16,
     };
-    fetchVerseData(params);
+    const key = generateKey(
+      params.version,
+      params.book,
+      params.chapter,
+      params.verse
+    );
+
+    fetchVerseData(key, params);
   }, []);
 
   return (
