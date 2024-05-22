@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import "@fontsource/archivo";
-
 import { colors } from "../utils/colors";
 import Navbar from "../components/Main/Navbar";
 import Hero from "@/components/Main/Hero";
@@ -10,25 +8,25 @@ import axios, { AxiosResponse } from "axios";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 
+import {
+  saveDataToSessionStorage,
+  getDataFromSessionStorage,
+} from "../utils/sessionStorage";
+
 interface VerseData {
   book: string;
   chapter: number;
   verse: number;
-  text: string;
+  version: string;
 }
 
 export default function Index() {
   const [verseData, setVerseData] = useState<any>();
 
-  const fetchVerseData = async () => {
+  const fetchVerseData = async (params: VerseData) => {
     try {
-      const response: AxiosResponse<VerseData> = await axios.get("/api/bible", {
-        params: {
-          version: "en-kjv",
-          book: "john",
-          chapter: 3,
-          verse: 16,
-        },
+      const response: AxiosResponse<any> = await axios.get("/api/bible", {
+        params,
       });
       setVerseData(response.data);
       console.log("Verse Data: ", response.data);
@@ -38,7 +36,13 @@ export default function Index() {
   };
 
   useEffect(() => {
-    fetchVerseData();
+    const params: VerseData = {
+      version: "en-kjv",
+      book: "john",
+      chapter: 3,
+      verse: 16,
+    };
+    fetchVerseData(params);
   }, []);
 
   return (
