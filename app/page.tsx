@@ -1,23 +1,45 @@
-import { createClient } from "@/utils/supabase/server";
-import "@fontsource/archivo"; // Add this line
+"use client";
+
+import React, { useState, useEffect } from "react";
+import "@fontsource/archivo";
 
 import { colors } from "../utils/colors";
 import Navbar from "../components/Main/Navbar";
 import Hero from "@/components/Main/Hero";
+import axios, { AxiosResponse } from "axios";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 
-export default async function Index() {
-  const canInitSupabaseClient = () => {
+interface VerseData {
+  book: string;
+  chapter: number;
+  verse: number;
+  text: string;
+}
+
+export default function Index() {
+  const [verseData, setVerseData] = useState<any>();
+
+  const fetchVerseData = async () => {
     try {
-      createClient();
-      return true;
-    } catch (e) {
-      return false;
+      const response: AxiosResponse<VerseData> = await axios.get("/api/bible", {
+        params: {
+          version: "en-kjv",
+          book: "john",
+          chapter: 3,
+          verse: 16,
+        },
+      });
+      setVerseData(response.data);
+      console.log("Verse Data: ", response.data);
+    } catch (error) {
+      console.error("Error fetching verse data:", error);
     }
   };
 
-  const isSupabaseConnected = canInitSupabaseClient();
+  useEffect(() => {
+    fetchVerseData();
+  }, []);
 
   return (
     <div className="flex w-full h-full">
