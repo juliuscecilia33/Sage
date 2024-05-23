@@ -17,12 +17,11 @@ import {
 interface VerseData {
   book: string;
   chapter: number;
-  verse: number;
   version: string;
 }
 
 export default function Index() {
-  const [verseData, setVerseData] = useState<any>();
+  const [verseData, setVerseData] = useState<object>();
 
   const fetchVerseData = async (key: string, params: VerseData) => {
     try {
@@ -30,15 +29,21 @@ export default function Index() {
       const storedData: any = getDataFromLocalStorage(key);
       if (storedData) {
         console.log("stored data from local session: ", storedData);
+        console.log("stored data from local session: ", typeof storedData);
         setVerseData(storedData);
         return storedData;
       }
-      const response: AxiosResponse<any> = await axios.get("/api/bible", {
-        params,
-      });
+      const response: AxiosResponse<any> = await axios.get(
+        "/api/bible/getChapter",
+        {
+          params,
+        }
+      );
       setVerseData(response.data);
       saveDataToLocalStorage(key, response.data);
       console.log("Verse Data not from local session: ", response.data);
+      console.log("VerseData", verseData);
+      console.log("VerseData", typeof verseData);
       return response.data;
     } catch (error) {
       console.error("Error fetching verse data:", error);
@@ -47,11 +52,10 @@ export default function Index() {
 
   const generateKey = (
     version: string,
-    book: string,
-    chapter: number,
-    verse: number
+    bookId: string,
+    chapter: number
   ): string => {
-    return `${version}-${book}-${chapter}-${verse}`;
+    return `${version}-${bookId}-${chapter}`;
   };
 
   useEffect(() => {
@@ -59,14 +63,8 @@ export default function Index() {
       version: "en-kjv",
       book: "john",
       chapter: 4,
-      verse: 16,
     };
-    const key = generateKey(
-      params.version,
-      params.book,
-      params.chapter,
-      params.verse
-    );
+    const key = generateKey(params.version, params.book, params.chapter);
 
     fetchVerseData(key, params);
   }, []);

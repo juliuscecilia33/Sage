@@ -1,6 +1,6 @@
 // "use server";
 
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
 import axios from "axios";
@@ -18,7 +18,7 @@ function constructBibleApiUrl(
   chapter: number,
   verse: number
 ): string {
-  const baseUrl = "https://cdn.jsdelivr.net/gh/wldeh/bible-api/bibles/";
+  const baseUrl = "https://bible-go-api.rkeplin.com/v1/books";
   return `${baseUrl}${version}/books/${book}/chapters/${chapter}/verses/${verse}.json`;
 }
 
