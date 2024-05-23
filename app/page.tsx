@@ -79,20 +79,22 @@ export default function Index() {
         <Navbar />
         <Hero bookTitle="Genesis" chapterCount={6} />
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
-          <h1 className={`${titleFont.className} readerTitle`}>
-            Chapter {chapter}
-          </h1>
-          {chapterData
-            ? chapterData.map((verse: any) => (
-                <p
-                  className={`${paragraphFont.className} readerDescription`}
-                  key={verse.id}
-                >
-                  <span className="text-[#B7C467]">{verse.verseId}</span>{" "}
-                  {verse.verse}
-                </p>
-              ))
-            : "Loading"}
+          <div className="px-[25%]">
+            <h1 className={`${titleFont.className} readerTitle mb-3`}>
+              Chapter {chapter}
+            </h1>
+            {chapterData
+              ? chapterData.map((verse: any) => (
+                  <p
+                    className={`${paragraphFont.className} readerDescription mb-3`}
+                    key={verse.id}
+                  >
+                    <span className="text-[#B7C467]">{verse.verseId}</span>{" "}
+                    {verse.verse}
+                  </p>
+                ))
+              : "Loading"}
+          </div>
         </div>
       </div>
       <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
