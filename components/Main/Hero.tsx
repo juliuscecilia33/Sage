@@ -54,14 +54,14 @@ const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
         </div>
         <div className="flex flex-row items-center">
           <button
-            className={`mr-3 border border-[#956E60] flex justify-center items-center p-2 text-sm font-inter font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
+            className={`mr-3 border border-[#956E60] flex justify-center items-center p-1.5 text-sm font-inter font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
           >
-            <FaBookBible />
+            <FaBookBible size={20} />
           </button>
           <button
-            className={`transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#B5B5B5] flex justify-center items-center p-2 text-sm font-inter font-medium rounded font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
+            className={`transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#B5B5B5] flex justify-center items-center p-1.5 text-sm font-inter font-medium rounded font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
           >
-            <CgNotes />
+            <CgNotes size={20} />
           </button>
         </div>
       </div>
