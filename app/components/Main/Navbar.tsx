@@ -1,5 +1,5 @@
 import { FaChevronRight, FaChevronLeft, FaChevronDown } from "react-icons/fa";
-import { colors } from "../../utils/colors";
+import { colors } from "../../../utils/colors";
 
 const Navbar = () => {
   return (

@@ -1,4 +1,4 @@
-import { colors } from "../../utils/colors";
+import { colors } from "../../../utils/colors";
 
 // Icons
 import { FaChevronDown } from "react-icons/fa";
