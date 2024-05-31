@@ -8,6 +8,8 @@ import { FaBookBible } from "react-icons/fa6";
 import { CgNotes } from "react-icons/cg";
 import { MdStickyNote2 } from "react-icons/md";
 
+import { paragraphFont, titleFont } from "@/utils/fonts";
+
 type HeroProps = {
   bookTitle: string;
   chapterCount: number;
@@ -15,7 +17,9 @@ type HeroProps = {
 
 const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
   return (
-    <div className="flex flex-col mt-4 pb-4 px-4 border-b border-[#F0F0F0]">
+    <div
+      className={`flex flex-col mt-4 pb-4 px-4 border-b border-[#F0F0F0] ${paragraphFont.className}`}
+    >
       <div className="flex flex-row w-full justify-between items-center">
         <h2 className="font-semibold text-3xl text-black font-archivo">
           {bookTitle}
