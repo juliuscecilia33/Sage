@@ -13,6 +13,8 @@ import {
   saveDataToLocalStorage,
   getDataFromLocalStorage,
 } from "../../utils/localStorage";
+import { cookies } from "next/headers";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 interface ChapterData {
   book: string;
@@ -20,9 +22,16 @@ interface ChapterData {
   version: string;
 }
 
-export default function Dashboard() {
+export default async function Dashboard() {
   const [chapterData, setChapterData] = useState<any>();
   const [chapter, setChapter] = useState<number>();
+
+  const cookieStore = cookies();
+  const supabase = createServerComponentClient({ cookies: () => cookieStore });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+  const user = session?.user;
 
   const fetchChapterData = async (key: string, params: ChapterData) => {
     try {
@@ -59,9 +68,9 @@ export default function Dashboard() {
 
   useEffect(() => {
     const params: ChapterData = {
-      version: "en-kjv",
-      book: "john",
-      chapter: 4,
+      version: "niv",
+      book: "ecclesiastes",
+      chapter: 1,
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
@@ -74,7 +83,11 @@ export default function Dashboard() {
 
   return (
     <div className="flex w-full h-full">
-      <div className="w-1/6 bg-blue-500 h-full">test</div>
+      <div className="w-1/6 bg-blue-500 h-full">
+        <form action="/auth/signout" method="post">
+          <button type="submit">Sign Out</button>
+        </form>
+      </div>
       <div className={`w-4/6 ${colors.primary.default}`}>
         <Navbar />
         <Hero bookTitle="Genesis" chapterCount={6} />
