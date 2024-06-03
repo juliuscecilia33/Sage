@@ -23,18 +23,10 @@ function constructBibleApiUrl(
 
   const bookId = getBookId(book);
 
-  console.log("book id:", bookId);
-  console.log(
-    "this is what the url should return: ",
-    `${baseUrl}${bookId}/chapters/${chapter}?translation=${version}`
-  );
-
   return `${baseUrl}${bookId}/chapters/${chapter}?translation=${version}`;
 }
 
 export async function GET(req: NextApiRequest) {
-  // const { version, book, chapter, verse } = request;
-
   const { searchParams } = new URL(req.url!);
   const version = searchParams.get("version");
   const book = searchParams.get("book");

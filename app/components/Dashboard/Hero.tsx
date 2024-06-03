@@ -16,6 +16,18 @@ type HeroProps = {
   chapterCount: number;
 };
 
+const BibleVersions = [
+  "ASV",
+  "BBE",
+  "DARBY",
+  "ESV",
+  "KJV",
+  "NIV",
+  "NLT",
+  "WEB",
+  "YLT",
+];
+
 const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
   return (
     <div
@@ -28,8 +40,8 @@ const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
           {bookTitle}
         </h2>
         <div className="flex flex-row items-center">
-          <Dropdown />
-          <Dropdown />
+          <Dropdown title="NIV" options={BibleVersions} />
+          <Dropdown title="Chapter 1" options={[]} />
         </div>
       </div>
       <div className="mt-4 flex flex-row w-full justify-between items-center">

@@ -23,6 +23,7 @@ interface ClientComponentProps {
 
 export default function Main({ user }: ClientComponentProps) {
   const [chapterData, setChapterData] = useState<any>();
+  const [numberOfChapters, setNumberOfChapters] = useState<number>();
   const [chapter, setChapter] = useState<number>();
 
   console.log("user info: ", user);
@@ -34,17 +35,21 @@ export default function Main({ user }: ClientComponentProps) {
       if (storedData) {
         console.log("stored data from local session: ", storedData);
         setChapterData(storedData);
+        setNumberOfChapters(storedData.length);
         return storedData;
+      } else {
+        const response: AxiosResponse<any> = await axios.get(
+          "/api/bible/getChapter",
+          {
+            params,
+          }
+        );
+        setChapterData(response.data);
+        saveDataToLocalStorage(key, response.data);
+        setNumberOfChapters(response.data.length);
+        console.log("Chapter Data not from local session: ", response.data);
+        return response.data;
       }
-      const response: AxiosResponse<any> = await axios.get(
-        "/api/bible/getChapter",
-        { params }
-      );
-
-      setChapterData(response.data);
-      saveDataToLocalStorage(key, response.data);
-      console.log("Chapter Data not from local session: ", response.data);
-      return response.data;
     } catch (error) {
       console.error("Error fetching verse data:", error);
     }
@@ -72,6 +77,7 @@ export default function Main({ user }: ClientComponentProps) {
   }, []);
 
   console.log("chapter data state: ", chapterData);
+  console.log("number of chapters", numberOfChapters);
 
   return (
     <div className="flex w-full h-full">
