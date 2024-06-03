@@ -2,8 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
+
+// Components
 import Navbar from "./Navbar";
 import Hero from "./Hero";
+
+// Utilities
 import { colors } from "../../../utils/colors";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import {
@@ -11,6 +15,10 @@ import {
   getDataFromLocalStorage,
 } from "../../../utils/localStorage";
 
+// Context
+import { useChapterCountContext } from "@/app/context/ChapterCount";
+
+// Interfaces
 interface ChapterData {
   book: string;
   chapter: number;
@@ -18,7 +26,7 @@ interface ChapterData {
 }
 
 interface ClientComponentProps {
-  user: any; // Define the user type more precisely if possible
+  user: any;
 }
 
 export default function Main({ user }: ClientComponentProps) {
@@ -26,11 +34,13 @@ export default function Main({ user }: ClientComponentProps) {
   const [numberOfChapters, setNumberOfChapters] = useState<number>();
   const [chapter, setChapter] = useState<number>();
 
+  const { value, setValue } = useChapterCountContext();
+
   console.log("user info: ", user);
 
   const fetchChapterData = async (key: string, params: ChapterData) => {
     try {
-      // Try to get data from localStorage
+      // Attempt to get data from localStorage
       const storedData: any = getDataFromLocalStorage(key);
       if (storedData) {
         console.log("stored data from local session: ", storedData);
