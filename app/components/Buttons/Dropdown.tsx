@@ -5,9 +5,10 @@ import { paragraphFont, titleFont } from "@/utils/fonts";
 type DropdownProps = {
   title: string;
   options: string[];
+  action: any;
 };
 
-const Dropdown = ({ title, options }: DropdownProps) => {
+const Dropdown = ({ title, options, action }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLUListElement>(null);
 
@@ -64,7 +65,10 @@ const Dropdown = ({ title, options }: DropdownProps) => {
             >
               {options.map((option, key) => (
                 <li key={key}>
-                  <button className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full">
+                  <button
+                    className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full"
+                    onClick={() => {}}
+                  >
                     <span className="whitespace-nowrap">{option}</span>
                   </button>
                 </li>

@@ -10,10 +10,11 @@ import { MdStickyNote2 } from "react-icons/md";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import Dropdown from "../Buttons/Dropdown";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { generateStringArray } from "@/utils/generateStringArray";
 
 type HeroProps = {
   bookTitle: string;
-  chapterCount: number;
 };
 
 const BibleVersions = [
@@ -28,7 +29,12 @@ const BibleVersions = [
   "YLT",
 ];
 
-const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
+const Hero = ({ bookTitle }: HeroProps) => {
+  const { chapterCount, setChapterCount, setBibleVersion } =
+    useCurrentBookDataContext();
+
+  const chapterOptions = generateStringArray(chapterCount);
+
   return (
     <div
       className={`${paragraphFont.className} flex flex-col mt-4 pb-4 px-4 border-b border-[#F0F0F0]`}
@@ -40,8 +46,8 @@ const Hero = ({ bookTitle, chapterCount }: HeroProps) => {
           {bookTitle}
         </h2>
         <div className="flex flex-row items-center">
-          <Dropdown title="NIV" options={BibleVersions} />
-          <Dropdown title="Chapter 1" options={[]} />
+          <Dropdown title="NIV" options={BibleVersions} action={null} />
+          <Dropdown title="Chapter 1" options={chapterOptions} action={null} />
         </div>
       </div>
       <div className="mt-4 flex flex-row w-full justify-between items-center">

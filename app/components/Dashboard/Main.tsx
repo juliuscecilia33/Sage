@@ -30,10 +30,12 @@ interface ClientComponentProps {
 }
 
 export default function Main({ user }: ClientComponentProps) {
+  // Use State
   const [chapterData, setChapterData] = useState<any>();
   const [numberOfChapters, setNumberOfChapters] = useState<number>();
   const [chapter, setChapter] = useState<number>();
 
+  // Context
   const { chapterCount, setChapterCount } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
@@ -46,6 +48,7 @@ export default function Main({ user }: ClientComponentProps) {
         console.log("stored data from local session: ", storedData);
         setChapterData(storedData);
         setNumberOfChapters(storedData.length);
+        setChapterCount(storedData.length);
         return storedData;
       } else {
         const response: AxiosResponse<any> = await axios.get(
@@ -57,6 +60,7 @@ export default function Main({ user }: ClientComponentProps) {
         setChapterData(response.data);
         saveDataToLocalStorage(key, response.data);
         setNumberOfChapters(response.data.length);
+        setChapterCount(response.data.length);
         console.log("Chapter Data not from local session: ", response.data);
         return response.data;
       }
@@ -88,6 +92,7 @@ export default function Main({ user }: ClientComponentProps) {
 
   console.log("chapter data state: ", chapterData);
   console.log("number of chapters", numberOfChapters);
+  console.log("chapter count context", chapterCount);
 
   return (
     <div className="flex w-full h-full">
@@ -98,7 +103,7 @@ export default function Main({ user }: ClientComponentProps) {
       </div>
       <div className={`w-4/6 ${colors.primary.default}`}>
         <Navbar />
-        <Hero bookTitle="Genesis" chapterCount={6} />
+        <Hero bookTitle="Genesis" />
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
           <div className="px-[25%]">
             <h1 className={`${titleFont.className} readerTitle mb-3`}>
