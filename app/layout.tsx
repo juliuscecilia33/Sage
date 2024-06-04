@@ -1,6 +1,6 @@
 import { Archivo } from "next/font/google";
 
-import { ChapterCountContextProvider } from "./context/ChapterCount";
+import { CurrentBookDataContextProvider } from "./context/CurrentBookData";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -26,7 +26,9 @@ export default function RootLayout({
     <html lang="en" className={`${archivo.className}`}>
       <body className="bg-background text-foreground">
         <main className="min-h-screen flex flex-col items-center">
-          <ChapterCountContextProvider>{children}</ChapterCountContextProvider>
+          <CurrentBookDataContextProvider>
+            {children}
+          </CurrentBookDataContextProvider>
         </main>
       </body>
     </html>

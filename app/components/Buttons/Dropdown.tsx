@@ -62,7 +62,14 @@ const Dropdown = ({ title, options }: DropdownProps) => {
               onBlur={handleBlur}
               tabIndex={-1}
             >
-              <li>
+              {options.map((option, key) => (
+                <li key={key}>
+                  <button className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full">
+                    <span className="whitespace-nowrap">{option}</span>
+                  </button>
+                </li>
+              ))}
+              {/* <li>
                 <button className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full">
                   <span className="whitespace-nowrap">Priority Ratings</span>
                 </button>
@@ -81,7 +88,7 @@ const Dropdown = ({ title, options }: DropdownProps) => {
                 <button className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full">
                   <span className="whitespace-nowrap">Support Center</span>
                 </button>
-              </li>
+              </li> */}
             </ul>
           )}
         </li>

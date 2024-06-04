@@ -16,7 +16,7 @@ import {
 } from "../../../utils/localStorage";
 
 // Context
-import { useChapterCountContext } from "@/app/context/ChapterCount";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
 // Interfaces
 interface ChapterData {
@@ -34,7 +34,7 @@ export default function Main({ user }: ClientComponentProps) {
   const [numberOfChapters, setNumberOfChapters] = useState<number>();
   const [chapter, setChapter] = useState<number>();
 
-  const { value, setValue } = useChapterCountContext();
+  const { chapterCount, setChapterCount } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
 
