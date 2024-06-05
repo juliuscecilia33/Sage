@@ -32,11 +32,11 @@ interface ClientComponentProps {
 export default function Main({ user }: ClientComponentProps) {
   // Use State
   const [chapterData, setChapterData] = useState<any>();
-  const [numberOfChapters, setNumberOfChapters] = useState<number>();
   const [chapter, setChapter] = useState<number>();
 
   // Context
-  const { chapterCount, setChapterCount } = useCurrentBookDataContext();
+  const { chapterCount, setChapterCount, bookName, setBookName, bibleVersion } =
+    useCurrentBookDataContext();
 
   console.log("user info: ", user);
 
@@ -47,8 +47,8 @@ export default function Main({ user }: ClientComponentProps) {
       if (storedData) {
         console.log("stored data from local session: ", storedData);
         setChapterData(storedData);
-        setNumberOfChapters(storedData.length);
         setChapterCount(storedData.length);
+        setBookName(storedData[0].book.name);
         return storedData;
       } else {
         const response: AxiosResponse<any> = await axios.get(
@@ -59,8 +59,8 @@ export default function Main({ user }: ClientComponentProps) {
         );
         setChapterData(response.data);
         saveDataToLocalStorage(key, response.data);
-        setNumberOfChapters(response.data.length);
         setChapterCount(response.data.length);
+        setBookName(response.data[0].book.name);
         console.log("Chapter Data not from local session: ", response.data);
         return response.data;
       }
@@ -79,9 +79,9 @@ export default function Main({ user }: ClientComponentProps) {
 
   useEffect(() => {
     const params: ChapterData = {
-      version: "niv",
-      book: "ecclesiastes",
-      chapter: 1,
+      version: bibleVersion,
+      book: bookName,
+      chapter: 2,
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
@@ -91,8 +91,8 @@ export default function Main({ user }: ClientComponentProps) {
   }, []);
 
   console.log("chapter data state: ", chapterData);
-  console.log("number of chapters", numberOfChapters);
   console.log("chapter count context", chapterCount);
+  console.log("book name from context", bookName);
 
   return (
     <div className="flex w-full h-full">
@@ -103,7 +103,7 @@ export default function Main({ user }: ClientComponentProps) {
       </div>
       <div className={`w-4/6 ${colors.primary.default}`}>
         <Navbar />
-        <Hero bookTitle="Genesis" />
+        <Hero />
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
           <div className="px-[25%]">
             <h1 className={`${titleFont.className} readerTitle mb-3`}>

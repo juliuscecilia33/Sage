@@ -13,6 +13,10 @@ interface CurrentBookDataValue {
   setChapterCount: (newValue: number) => void;
   bibleVersion: string;
   setBibleVersion: (newValue: string) => void;
+  bookName: string;
+  setBookName: (newValue: string) => void;
+  bookChapter: number;
+  setBookChapter: (newValue: number) => void;
 }
 
 const CurrentBookDataContext = createContext<CurrentBookDataValue | undefined>(
@@ -26,8 +30,10 @@ interface CurrentBookDataContextProviderProps {
 export const CurrentBookDataContextProvider: React.FC<
   CurrentBookDataContextProviderProps
 > = ({ children }) => {
-  const [chapterCount, setChapterCount] = useState<number>(0);
+  const [chapterCount, setChapterCount] = useState<number>(1);
   const [bibleVersion, setBibleVersion] = useState<string>("NIV");
+  const [bookName, setBookName] = useState<string>("Ecclesiastes");
+  const [bookChapter, setBookChapter] = useState<number>(1);
 
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
@@ -36,6 +42,10 @@ export const CurrentBookDataContextProvider: React.FC<
       setChapterCount,
       bibleVersion,
       setBibleVersion,
+      bookName,
+      setBookName,
+      bookChapter,
+      setBookChapter,
     }),
     [chapterCount, setChapterCount, bibleVersion, setBibleVersion]
   );

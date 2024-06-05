@@ -13,10 +13,6 @@ import Dropdown from "../Buttons/Dropdown";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { generateStringArray } from "@/utils/generateStringArray";
 
-type HeroProps = {
-  bookTitle: string;
-};
-
 const BibleVersions = [
   "ASV",
   "BBE",
@@ -29,8 +25,8 @@ const BibleVersions = [
   "YLT",
 ];
 
-const Hero = ({ bookTitle }: HeroProps) => {
-  const { chapterCount, setChapterCount, setBibleVersion } =
+const Hero = () => {
+  const { chapterCount, setChapterCount, setBibleVersion, bookName } =
     useCurrentBookDataContext();
 
   const chapterOptions = generateStringArray(chapterCount);
@@ -43,7 +39,7 @@ const Hero = ({ bookTitle }: HeroProps) => {
         <h2
           className={`${titleFont.className} font-semibold text-3xl text-black font-archivo`}
         >
-          {bookTitle}
+          {bookName}
         </h2>
         <div className="flex flex-row items-center">
           <Dropdown title="NIV" options={BibleVersions} action={null} />
