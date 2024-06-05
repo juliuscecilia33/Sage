@@ -44,10 +44,14 @@ export default function Main({ user }: ClientComponentProps) {
     try {
       // Attempt to get data from localStorage
       const storedData: any = getDataFromLocalStorage(key);
-      if (storedData) {
+      const chapterCountFromLocalStorage: number = getDataFromLocalStorage(
+        key + "-chapterCount"
+      );
+
+      if (storedData && chapterCountFromLocalStorage) {
         console.log("stored data from local session: ", storedData);
         setChapterData(storedData);
-        setChapterCount(storedData.length);
+        setChapterCount(chapterCountFromLocalStorage);
         setBookName(storedData[0].book.name);
         return storedData;
       } else {
@@ -57,9 +61,20 @@ export default function Main({ user }: ClientComponentProps) {
             params,
           }
         );
+
+        const chapterCountFromAPI: AxiosResponse<any> = await axios.get(
+          "/api/bible/getChapterCount",
+          {
+            params,
+          }
+        );
+
+        console.log("chapter count", chapterCountFromAPI.data);
+
         setChapterData(response.data);
         saveDataToLocalStorage(key, response.data);
-        setChapterCount(response.data.length);
+        saveDataToLocalStorage(key + "-chapterCount", chapterCountFromAPI.data);
+        setChapterCount(chapterCountFromAPI.data);
         setBookName(response.data[0].book.name);
         console.log("Chapter Data not from local session: ", response.data);
         return response.data;
