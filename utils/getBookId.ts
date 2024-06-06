@@ -314,11 +314,20 @@ const books = [
 
 // Create a mapping object
 const bookToIdMap: { [key: string]: number } = {};
+const bookNamesArray: string[] = [];
 
 // Populate the mapping object
 books.forEach((book) => {
   bookToIdMap[book.name.toLowerCase()] = book.id;
 });
+
+books.forEach((book) => {
+  bookNamesArray.push(book.name);
+});
+
+export const getBookNamesArray = () => {
+  return bookNamesArray;
+};
 
 // Function to get the book ID by name
 export const getBookId = (bookName: string): number | undefined => {

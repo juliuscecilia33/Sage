@@ -1,6 +1,7 @@
 // components/Navbar.tsx
 import { useState, useRef, FocusEvent } from "react";
 import { paragraphFont, titleFont } from "@/utils/fonts";
+import { FaChevronDown } from "react-icons/fa";
 
 type DropdownProps = {
   title: string;
@@ -16,10 +17,11 @@ const Dropdown = ({ title, options, action }: DropdownProps) => {
       <div>
         <button
           type="button"
-          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className={`${paragraphFont.className} inline-flex justify-center items-center w-full rounded-md px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {title}
+          <FaChevronDown className="ml-2" />
         </button>
       </div>
 
