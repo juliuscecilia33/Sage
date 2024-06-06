@@ -3,6 +3,7 @@ import { colors } from "../../../utils/colors";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { getBookNamesArray } from "@/utils/getBookId";
+import BooksDropdown from "../Buttons/BooksDropdown";
 
 const Navbar = () => {
   const { bookName } = useCurrentBookDataContext();
@@ -19,12 +20,7 @@ const Navbar = () => {
         <FaChevronLeft className="mr-1" />
         Revelation
       </button>
-      <button
-        className={`${paragraphFont.className} flex justify-center items-center px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
-      >
-        {bookName}
-        <FaChevronDown className="ml-1" />
-      </button>
+      <BooksDropdown title={bookName} options={booksArray} action={null} />
       <button
         className={`${paragraphFont.className} flex justify-center items-center px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FEF2EE] text-[#956E60]`}
       >
