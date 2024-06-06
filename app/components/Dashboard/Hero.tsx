@@ -26,8 +26,14 @@ const BibleVersions = [
 ];
 
 const Hero = () => {
-  const { chapterCount, setChapterCount, setBibleVersion, bookName } =
-    useCurrentBookDataContext();
+  const {
+    chapterCount,
+    setChapterCount,
+    bibleVersion,
+    setBibleVersion,
+    bookName,
+    bookChapter,
+  } = useCurrentBookDataContext();
 
   const chapterOptions = generateStringArray(chapterCount);
 
@@ -42,8 +48,16 @@ const Hero = () => {
           {bookName}
         </h2>
         <div className="flex flex-row items-center">
-          <Dropdown title="NIV" options={BibleVersions} action={null} />
-          <Dropdown title="Chapter 1" options={chapterOptions} action={null} />
+          <Dropdown
+            title={bibleVersion}
+            options={BibleVersions}
+            action={null}
+          />
+          <Dropdown
+            title={`Chapter ${bookChapter}`}
+            options={chapterOptions}
+            action={null}
+          />
         </div>
       </div>
       <div className="mt-4 flex flex-row w-full justify-between items-center">

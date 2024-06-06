@@ -8,6 +8,8 @@ import React, {
   useMemo,
 } from "react";
 
+import { getDataFromLocalStorage } from "@/utils/localStorage";
+
 interface CurrentBookDataValue {
   chapterCount: number;
   setChapterCount: (newValue: number) => void;
@@ -30,9 +32,21 @@ interface CurrentBookDataContextProviderProps {
 export const CurrentBookDataContextProvider: React.FC<
   CurrentBookDataContextProviderProps
 > = ({ children }) => {
+  const previousBibleVersion: string =
+    getDataFromLocalStorage("previousBibleVersion") ?? "NIV";
+
+  const previousChapter: number =
+    getDataFromLocalStorage("previousChapter") ?? 1;
+
+  const previousBookName: string =
+    getDataFromLocalStorage("previousBookName") ?? "Genesis";
+
   const [chapterCount, setChapterCount] = useState<number>(1);
+  // TODO: this should be set to a value from local storage, and if it doesn't exist in local storage, then set it to this default value
   const [bibleVersion, setBibleVersion] = useState<string>("NIV");
-  const [bookName, setBookName] = useState<string>("Ecclesiastes");
+  // TODO: this should be set to a value from local storage, and if it doesn't exist in local storage, then set it to this default value
+  const [bookName, setBookName] = useState<string>("Genesis");
+  // TODO: this should be set to a value from local storage, and if it doesn't exist in local storage, then set it to this default value
   const [bookChapter, setBookChapter] = useState<number>(1);
 
   // Use useMemo to memoize the context value

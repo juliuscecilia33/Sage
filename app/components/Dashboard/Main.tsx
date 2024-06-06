@@ -35,8 +35,14 @@ export default function Main({ user }: ClientComponentProps) {
   const [chapter, setChapter] = useState<number>();
 
   // Context
-  const { chapterCount, setChapterCount, bookName, setBookName, bibleVersion } =
-    useCurrentBookDataContext();
+  const {
+    chapterCount,
+    setChapterCount,
+    bookName,
+    setBookName,
+    bibleVersion,
+    bookChapter,
+  } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
 
@@ -53,6 +59,11 @@ export default function Main({ user }: ClientComponentProps) {
         setChapterData(storedData);
         setChapterCount(chapterCountFromLocalStorage);
         setBookName(storedData[0].book.name);
+
+        saveDataToLocalStorage("previousBookName", storedData[0].book.name);
+        saveDataToLocalStorage("previousChapter", params.chapter);
+        saveDataToLocalStorage("previousBibleVersion", params.version);
+
         return storedData;
       } else {
         const response: AxiosResponse<any> = await axios.get(
@@ -74,6 +85,9 @@ export default function Main({ user }: ClientComponentProps) {
         setChapterData(response.data);
         saveDataToLocalStorage(key, response.data);
         saveDataToLocalStorage(key + "-chapterCount", chapterCountFromAPI.data);
+        saveDataToLocalStorage("previousBookName", response.data[0].book.name);
+        saveDataToLocalStorage("previousChapter", params.chapter);
+        saveDataToLocalStorage("previousBibleVersion", params.version);
         setChapterCount(chapterCountFromAPI.data);
         setBookName(response.data[0].book.name);
         console.log("Chapter Data not from local session: ", response.data);
@@ -93,10 +107,19 @@ export default function Main({ user }: ClientComponentProps) {
   };
 
   useEffect(() => {
+    const previousBibleVersion: string =
+      getDataFromLocalStorage("previousBibleVersion") ?? bibleVersion;
+
+    const previousChapter: number =
+      getDataFromLocalStorage("previousChapter") ?? bookChapter;
+
+    const previousBookName: string =
+      getDataFromLocalStorage("previousBookName") ?? bookName;
+
     const params: ChapterData = {
-      version: bibleVersion,
-      book: bookName,
-      chapter: 2,
+      version: previousBibleVersion,
+      book: previousBookName,
+      chapter: previousChapter,
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
@@ -105,8 +128,23 @@ export default function Main({ user }: ClientComponentProps) {
     fetchChapterData(key, params);
   }, []);
 
+  // useEffect(() => {
+
+  //   const params: ChapterData = {
+  //     version: bibleVersion,
+  //     book: bookName,
+  //     chapter: bookChapter,
+  //   };
+  //   const key = generateKey(params.version, params.book, params.chapter);
+
+  //   setChapter(params.chapter);
+
+  //   fetchChapterData(key, params);
+  // }, [bibleVersion, bookName, bookChapter]);
+
   console.log("chapter data state: ", chapterData);
   console.log("chapter count context", chapterCount);
+  console.log("chapter context", bookChapter);
   console.log("book name from context", bookName);
 
   return (
