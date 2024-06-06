@@ -42,6 +42,8 @@ export default function Main({ user }: ClientComponentProps) {
     setBookName,
     bibleVersion,
     bookChapter,
+    setBibleVersion,
+    setBookChapter,
   } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
@@ -107,21 +109,28 @@ export default function Main({ user }: ClientComponentProps) {
   };
 
   useEffect(() => {
-    const previousBibleVersion: string =
-      getDataFromLocalStorage("previousBibleVersion") ?? bibleVersion;
+    if (getDataFromLocalStorage("previousBibleVersion")) {
+      setBibleVersion(getDataFromLocalStorage("previousBibleVersion"));
+    }
 
-    const previousChapter: number =
-      getDataFromLocalStorage("previousChapter") ?? bookChapter;
+    if (getDataFromLocalStorage("previousChapter")) {
+      setBookChapter(getDataFromLocalStorage("previousChapter"));
+    }
 
-    const previousBookName: string =
-      getDataFromLocalStorage("previousBookName") ?? bookName;
+    if (getDataFromLocalStorage("previousBookName")) {
+      setBookName(getDataFromLocalStorage("previousBookName"));
+    }
 
     const params: ChapterData = {
-      version: previousBibleVersion,
-      book: previousBookName,
-      chapter: previousChapter,
+      version: bibleVersion,
+      book: bookName,
+      chapter: bookChapter,
     };
     const key = generateKey(params.version, params.book, params.chapter);
+
+    if (getDataFromLocalStorage(key + "-chapterCount")) {
+      setChapterCount(getDataFromLocalStorage(key + "-chapterCount"));
+    }
 
     setChapter(params.chapter);
 
@@ -160,7 +169,7 @@ export default function Main({ user }: ClientComponentProps) {
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
           <div className="px-[25%]">
             <h1 className={`${titleFont.className} readerTitle mb-3`}>
-              Chapter {chapter}
+              Chapter {bookChapter}
             </h1>
             {chapterData
               ? chapterData.map((verse: any) => (
