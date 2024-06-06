@@ -10,72 +10,38 @@ type DropdownProps = {
 
 const Dropdown = ({ title, options, action }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const menuRef = useRef<HTMLUListElement>(null);
-
-  const handleMouseEnter = () => setIsOpen(true);
-  const handleMouseLeave = () => setIsOpen(false);
-  const handleButtonClick = () => setIsOpen((prev) => !prev);
-
-  const handleBlur = (event: FocusEvent<HTMLUListElement>) => {
-    if (
-      menuRef.current &&
-      !menuRef.current.contains(event.relatedTarget as Node)
-    ) {
-      setIsOpen(false);
-    }
-  };
 
   return (
-    <ul className="flex flex-wrap items-center font-medium text-sm">
-      <li
-        className={`${paragraphFont.className} relative flex items-center space-x-1 px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FBFCFD] text-[#B5B5B5] ml-3`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <a
-          className={`${paragraphFont.className}`}
-          href="#0"
-          aria-expanded={isOpen}
+    <div className="relative inline-block text-left ml-5">
+      <div>
+        <button
+          type="button"
+          className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={() => setIsOpen(!isOpen)}
         >
           {title}
-        </a>
-        <button
-          className="shrink-0 p-1"
-          aria-expanded={isOpen}
-          onClick={handleButtonClick}
-        >
-          <span className="sr-only">Show submenu for "Flyout Menu"</span>
-          <svg
-            className="w-3 h-3 fill-slate-500"
-            xmlns="http://www.w3.org/2000/svg"
-            width="12"
-            height="12"
-          >
-            <path d="M10 2.586L11.414 4 6 9.414.586 4 2 2.586l4 4z" />
-          </svg>
         </button>
-        {/* 2nd level menu */}
-        {isOpen && (
-          <ul
-            ref={menuRef}
-            className="origin-top-right absolute top-full left-1/2 -translate-x-1/2 bg-white border border-slate-200 p-2 rounded-lg shadow-xl"
-            onBlur={handleBlur}
-            tabIndex={-1}
-          >
-            {options.map((option, key) => (
-              <li key={key}>
-                <button
-                  className="text-slate-800 hover:bg-slate-50 flex items-center p-2 w-full"
-                  onClick={() => {}}
-                >
-                  <span className="whitespace-nowrap">{option}</span>
-                </button>
-              </li>
+      </div>
+
+      {isOpen && (
+        <div className="origin-top-right absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+          <div className="p-3 grid grid-cols-3 gap-2">
+            {options.map((chapter, index) => (
+              <button
+                key={index}
+                className="w-full text-center px-2 py-1 hover:bg-gray-100 rounded-md"
+                onClick={() => {
+                  console.log(`Selected: ${chapter}`);
+                  setIsOpen(false);
+                }}
+              >
+                {chapter}
+              </button>
             ))}
-          </ul>
-        )}
-      </li>
-    </ul>
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

@@ -62,10 +62,6 @@ export default function Main({ user }: ClientComponentProps) {
         setChapterCount(chapterCountFromLocalStorage);
         setBookName(storedData[0].book.name);
 
-        saveDataToLocalStorage("previousBookName", storedData[0].book.name);
-        saveDataToLocalStorage("previousChapter", params.chapter);
-        saveDataToLocalStorage("previousBibleVersion", params.version);
-
         return storedData;
       } else {
         const response: AxiosResponse<any> = await axios.get(
@@ -87,9 +83,6 @@ export default function Main({ user }: ClientComponentProps) {
         setChapterData(response.data);
         saveDataToLocalStorage(key, response.data);
         saveDataToLocalStorage(key + "-chapterCount", chapterCountFromAPI.data);
-        saveDataToLocalStorage("previousBookName", response.data[0].book.name);
-        saveDataToLocalStorage("previousChapter", params.chapter);
-        saveDataToLocalStorage("previousBibleVersion", params.version);
         setChapterCount(chapterCountFromAPI.data);
         setBookName(response.data[0].book.name);
         console.log("Chapter Data not from local session: ", response.data);
@@ -109,18 +102,6 @@ export default function Main({ user }: ClientComponentProps) {
   };
 
   useEffect(() => {
-    if (getDataFromLocalStorage("previousBibleVersion")) {
-      setBibleVersion(getDataFromLocalStorage("previousBibleVersion"));
-    }
-
-    if (getDataFromLocalStorage("previousChapter")) {
-      setBookChapter(getDataFromLocalStorage("previousChapter"));
-    }
-
-    if (getDataFromLocalStorage("previousBookName")) {
-      setBookName(getDataFromLocalStorage("previousBookName"));
-    }
-
     const params: ChapterData = {
       version: bibleVersion,
       book: bookName,
