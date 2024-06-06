@@ -13,7 +13,7 @@ const Dropdown = ({ title, options, action }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative inline-block text-left ml-5">
+    <div className="relative inline-block text-left ml-5 z-5">
       <div>
         <button
           type="button"

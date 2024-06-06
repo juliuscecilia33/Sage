@@ -10,8 +10,6 @@ const Navbar = () => {
 
   const booksArray: string[] = getBookNamesArray();
 
-  console.log("books array", booksArray);
-
   return (
     <div className="px-4 pt-4 flex flex-row w-full justify-between items-center">
       <button
