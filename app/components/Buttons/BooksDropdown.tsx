@@ -2,6 +2,7 @@
 import { useState, useRef, FocusEvent } from "react";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
 type BooksDropdownProps = {
   title: string;
@@ -11,6 +12,8 @@ type BooksDropdownProps = {
 
 const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { setBookName } = useCurrentBookDataContext();
 
   return (
     <div className="relative inline-block text-left ml-5 z-10">
@@ -51,6 +54,7 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
                 onClick={() => {
                   console.log(`Selected: ${book}`);
                   setIsOpen(false);
+                  setBookName(book);
                 }}
               >
                 {book}

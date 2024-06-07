@@ -31,7 +31,6 @@ interface ClientComponentProps {
 
 export default function Main({ user }: ClientComponentProps) {
   // Use State
-  const [chapterData, setChapterData] = useState<any>();
   const [chapter, setChapter] = useState<number>();
 
   // Context
@@ -44,6 +43,8 @@ export default function Main({ user }: ClientComponentProps) {
     bookChapter,
     setBibleVersion,
     setBookChapter,
+    setChapterData,
+    chapterData,
   } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
@@ -109,28 +110,10 @@ export default function Main({ user }: ClientComponentProps) {
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
-    if (getDataFromLocalStorage(key + "-chapterCount")) {
-      setChapterCount(getDataFromLocalStorage(key + "-chapterCount"));
-    }
-
     setChapter(params.chapter);
 
     fetchChapterData(key, params);
   }, []);
-
-  // useEffect(() => {
-
-  //   const params: ChapterData = {
-  //     version: bibleVersion,
-  //     book: bookName,
-  //     chapter: bookChapter,
-  //   };
-  //   const key = generateKey(params.version, params.book, params.chapter);
-
-  //   setChapter(params.chapter);
-
-  //   fetchChapterData(key, params);
-  // }, [bibleVersion, bookName, bookChapter]);
 
   console.log("chapter data state: ", chapterData);
   console.log("chapter count context", chapterCount);

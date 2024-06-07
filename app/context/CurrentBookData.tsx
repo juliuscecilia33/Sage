@@ -19,6 +19,8 @@ interface CurrentBookDataValue {
   setBookName: (newValue: string) => void;
   bookChapter: number;
   setBookChapter: (newValue: number) => void;
+  chapterData: any;
+  setChapterData: (newValue: any) => void;
 }
 
 const CurrentBookDataContext = createContext<CurrentBookDataValue | undefined>(
@@ -48,6 +50,7 @@ export const CurrentBookDataContextProvider: React.FC<
   const [bookName, setBookName] = useState<string>("Genesis");
   // TODO: this should be set to a value from local storage, and if it doesn't exist in local storage, then set it to this default value
   const [bookChapter, setBookChapter] = useState<number>(1);
+  const [chapterData, setChapterData] = useState<any>(null);
 
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
@@ -60,8 +63,19 @@ export const CurrentBookDataContextProvider: React.FC<
       setBookName,
       bookChapter,
       setBookChapter,
+      chapterData,
+      setChapterData,
     }),
-    [chapterCount, setChapterCount, bibleVersion, setBibleVersion]
+    [
+      chapterCount,
+      setChapterCount,
+      bibleVersion,
+      setBibleVersion,
+      bookChapter,
+      setBookChapter,
+      chapterData,
+      setChapterData,
+    ]
   );
 
   return (
