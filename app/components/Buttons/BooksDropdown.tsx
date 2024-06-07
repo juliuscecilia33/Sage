@@ -4,6 +4,7 @@ import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { fetchChapterData } from "@/utils/fetchChapterData";
+import { generateKey } from "@/utils/generateKey";
 
 type BooksDropdownProps = {
   title: string;
@@ -20,14 +21,6 @@ interface ChapterData {
 
 const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
-  const generateKey = (
-    version: string,
-    bookId: string,
-    chapter: number
-  ): string => {
-    return `${version}-${bookId}-${chapter}`;
-  };
 
   const {
     chapterCount,

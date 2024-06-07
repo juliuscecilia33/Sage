@@ -12,6 +12,8 @@ import { paragraphFont, titleFont } from "@/utils/fonts";
 
 import { fetchChapterData } from "@/utils/fetchChapterData";
 
+import { generateKey } from "@/utils/generateKey";
+
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
@@ -42,14 +44,6 @@ export default function Main({ user }: ClientComponentProps) {
   } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
-
-  const generateKey = (
-    version: string,
-    bookId: string,
-    chapter: number
-  ): string => {
-    return `${version}-${bookId}-${chapter}`;
-  };
 
   useEffect(() => {
     const params: ChapterData = {
