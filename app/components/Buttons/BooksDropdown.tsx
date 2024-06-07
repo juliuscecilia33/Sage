@@ -3,6 +3,7 @@ import { useState, useRef, FocusEvent } from "react";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { fetchChapterData } from "@/utils/fetchChapterData";
 
 type BooksDropdownProps = {
   title: string;
@@ -10,10 +11,36 @@ type BooksDropdownProps = {
   action: any;
 };
 
+// Interfaces
+interface ChapterData {
+  book: string;
+  chapter: number;
+  version: string;
+}
+
 const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { setBookName } = useCurrentBookDataContext();
+  const generateKey = (
+    version: string,
+    bookId: string,
+    chapter: number
+  ): string => {
+    return `${version}-${bookId}-${chapter}`;
+  };
+
+  const {
+    chapterCount,
+    setChapterCount,
+    bookName,
+    setBookName,
+    bibleVersion,
+    bookChapter,
+    setBibleVersion,
+    setBookChapter,
+    setChapterData,
+    chapterData,
+  } = useCurrentBookDataContext();
 
   return (
     <div className="relative inline-block text-left ml-5 z-10">
@@ -55,6 +82,26 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
                   console.log(`Selected: ${book}`);
                   setIsOpen(false);
                   setBookName(book);
+
+                  const params: ChapterData = {
+                    version: bibleVersion,
+                    book: book,
+                    chapter: bookChapter,
+                  };
+
+                  const key = generateKey(
+                    params.version,
+                    params.book,
+                    params.chapter
+                  );
+
+                  fetchChapterData(
+                    key,
+                    params,
+                    setChapterData,
+                    setChapterCount,
+                    setBookName
+                  );
                 }}
               >
                 {book}

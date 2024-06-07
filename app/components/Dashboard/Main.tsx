@@ -27,9 +27,6 @@ interface ClientComponentProps {
 }
 
 export default function Main({ user }: ClientComponentProps) {
-  // Use State
-  const [chapter, setChapter] = useState<number>();
-
   // Context
   const {
     chapterCount,
@@ -61,8 +58,6 @@ export default function Main({ user }: ClientComponentProps) {
       chapter: bookChapter,
     };
     const key = generateKey(params.version, params.book, params.chapter);
-
-    setChapter(params.chapter);
 
     fetchChapterData(key, params, setChapterData, setChapterCount, setBookName);
   }, [
