@@ -29,7 +29,21 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
         <div
           className={`${paragraphFont.className} py-3 origin-top-center absolute left-1/2 transform -translate-x-1/2 mt-2 w-[50rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5`}
         >
-          <div className="p-3 grid grid-cols-4 gap-3">
+          <div className="relative flex py-5 items-center">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="flex-shrink mx-4 text-gray-400">
+              Recently Read
+            </span>
+            <div className="flex-grow border-t border-gray-400"></div>
+          </div>
+          <div className="relative flex py-5 items-center">
+            <div className="flex-grow border-t border-gray-400"></div>
+            <span className="flex-shrink mx-4 text-gray-400">
+              Old Testament
+            </span>
+            <div className="flex-grow border-t border-gray-400"></div>
+          </div>
+          <div className="p-3 grid grid-cols-5 gap-3">
             {options.slice(0, 39).map((book, index) => (
               <button
                 key={index}
@@ -50,7 +64,7 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
             </span>
             <div className="flex-grow border-t border-gray-400"></div>
           </div>
-          <div className="p-3 grid grid-cols-4 gap-3">
+          <div className="p-3 grid grid-cols-5 gap-3">
             {options.slice(40, 66).map((book, index) => (
               <button
                 key={index}
