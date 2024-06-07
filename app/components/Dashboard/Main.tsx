@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
 
 // Components
 import Navbar from "./Navbar";
@@ -10,10 +9,8 @@ import Hero from "./Hero";
 // Utilities
 import { colors } from "../../../utils/colors";
 import { paragraphFont, titleFont } from "@/utils/fonts";
-import {
-  saveDataToLocalStorage,
-  getDataFromLocalStorage,
-} from "../../../utils/localStorage";
+
+import { fetchChapterData } from "@/utils/fetchChapterData";
 
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
@@ -49,51 +46,6 @@ export default function Main({ user }: ClientComponentProps) {
 
   console.log("user info: ", user);
 
-  const fetchChapterData = async (key: string, params: ChapterData) => {
-    try {
-      // Attempt to get data from localStorage
-      const storedData: any = getDataFromLocalStorage(key);
-      const chapterCountFromLocalStorage: number = getDataFromLocalStorage(
-        key + "-chapterCount"
-      );
-
-      if (storedData && chapterCountFromLocalStorage) {
-        console.log("stored data from local session: ", storedData);
-        setChapterData(storedData);
-        setChapterCount(chapterCountFromLocalStorage);
-        setBookName(storedData[0].book.name);
-
-        return storedData;
-      } else {
-        const response: AxiosResponse<any> = await axios.get(
-          "/api/bible/getChapter",
-          {
-            params,
-          }
-        );
-
-        const chapterCountFromAPI: AxiosResponse<any> = await axios.get(
-          "/api/bible/getChapterCount",
-          {
-            params,
-          }
-        );
-
-        console.log("chapter count", chapterCountFromAPI.data);
-
-        setChapterData(response.data);
-        saveDataToLocalStorage(key, response.data);
-        saveDataToLocalStorage(key + "-chapterCount", chapterCountFromAPI.data);
-        setChapterCount(chapterCountFromAPI.data);
-        setBookName(response.data[0].book.name);
-        console.log("Chapter Data not from local session: ", response.data);
-        return response.data;
-      }
-    } catch (error) {
-      console.error("Error fetching verse data:", error);
-    }
-  };
-
   const generateKey = (
     version: string,
     bookId: string,
@@ -112,8 +64,15 @@ export default function Main({ user }: ClientComponentProps) {
 
     setChapter(params.chapter);
 
-    fetchChapterData(key, params);
-  }, []);
+    fetchChapterData(key, params, setChapterData, setChapterCount, setBookName);
+  }, [
+    bibleVersion,
+    bookName,
+    bookChapter,
+    setChapterData,
+    setChapterCount,
+    setBookName,
+  ]);
 
   console.log("chapter data state: ", chapterData);
   console.log("chapter count context", chapterCount);

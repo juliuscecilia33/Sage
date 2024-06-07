@@ -12,21 +12,14 @@ import {
   getDataFromLocalStorage,
 } from "../utils/localStorage";
 
-import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-
-export const fetchChapterData = async (key: string, params: ChapterData) => {
+export const fetchChapterData = async (
+  key: string,
+  params: ChapterData,
+  setChapterData: (data: any) => void,
+  setChapterCount: (count: number) => void,
+  setBookName: (name: string) => void
+) => {
   // Context
-  const {
-    chapterCount,
-    setChapterCount,
-    bookName,
-    setBookName,
-    bibleVersion,
-    bookChapter,
-    setBibleVersion,
-    setBookChapter,
-    setChapterData,
-  } = useCurrentBookDataContext();
 
   try {
     // Attempt to get data from localStorage
