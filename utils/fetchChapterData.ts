@@ -40,6 +40,7 @@ export const fetchChapterData = async (
       setChapterCount(chapterCountFromLocalStorage);
       setBookName(storedData[0].book.name);
       setBookChapter(storedData[0].chapterId);
+      setBibleVersion(key.split("-")[0]);
 
       return storedData;
     } else {
@@ -65,6 +66,7 @@ export const fetchChapterData = async (
       setChapterCount(chapterCountFromAPI.data);
       setBookName(response.data[0].book.name);
       setBookChapter(response.data[0].chapterId);
+      setBibleVersion(key.split("-")[0]);
       console.log("Chapter Data not from local session: ", response.data);
       return response.data;
     }
