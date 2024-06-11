@@ -2,15 +2,35 @@
 import { useState, useRef, FocusEvent } from "react";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { fetchChapterData } from "@/utils/fetchChapterData";
+import { generateKey } from "@/utils/generateKey";
 
 type DropdownProps = {
   title: string;
   options: string[];
-  action: any;
+  type: string;
 };
 
-const Dropdown = ({ title, options, action }: DropdownProps) => {
+// Interfaces
+interface ChapterData {
+  book: string;
+  chapter: number;
+  version: string;
+}
+
+const Dropdown = ({ title, options, type }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const {
+    setChapterCount,
+    setBookName,
+    bibleVersion,
+    bookChapter,
+    setChapterData,
+    bookName,
+    setIsLoading,
+  } = useCurrentBookDataContext();
 
   return (
     <div className="relative inline-block text-left ml-5 z-5">
@@ -28,16 +48,61 @@ const Dropdown = ({ title, options, action }: DropdownProps) => {
       {isOpen && (
         <div className="origin-top-right absolute right-0 mt-2 w-60 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
           <div className="p-3 grid grid-cols-3 gap-2">
-            {options.map((chapter, index) => (
+            {options.map((option, index) => (
               <button
                 key={index}
                 className="w-full text-center px-2 py-1 hover:bg-gray-100 rounded-md"
                 onClick={() => {
-                  console.log(`Selected: ${chapter}`);
+                  console.log(`Selected: ${option}`);
+
+                  if (type === "version") {
+                    const params: ChapterData = {
+                      version: option,
+                      book: bookName,
+                      chapter: bookChapter,
+                    };
+
+                    const key = generateKey(
+                      params.version,
+                      params.book,
+                      params.chapter
+                    );
+
+                    fetchChapterData(
+                      key,
+                      params,
+                      setChapterData,
+                      setChapterCount,
+                      setBookName,
+                      setIsLoading
+                    );
+                  } else if (type === "chapter") {
+                    const params: ChapterData = {
+                      version: bibleVersion,
+                      book: bookName,
+                      chapter: Number(option),
+                    };
+
+                    const key = generateKey(
+                      params.version,
+                      params.book,
+                      params.chapter
+                    );
+
+                    fetchChapterData(
+                      key,
+                      params,
+                      setChapterData,
+                      setChapterCount,
+                      setBookName,
+                      setIsLoading
+                    );
+                  }
+
                   setIsOpen(false);
                 }}
               >
-                {chapter}
+                {option}
               </button>
             ))}
           </div>

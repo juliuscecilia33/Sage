@@ -23,16 +23,12 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const {
-    chapterCount,
     setChapterCount,
-    bookName,
     setBookName,
     bibleVersion,
     bookChapter,
-    setBibleVersion,
-    setBookChapter,
     setChapterData,
-    chapterData,
+    setIsLoading,
   } = useCurrentBookDataContext();
 
   return (
@@ -93,7 +89,8 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
                     params,
                     setChapterData,
                     setChapterCount,
-                    setBookName
+                    setBookName,
+                    setIsLoading
                   );
                 }}
               >

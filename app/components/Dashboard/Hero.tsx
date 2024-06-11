@@ -51,12 +51,12 @@ const Hero = () => {
           <Dropdown
             title={bibleVersion}
             options={BibleVersions}
-            action={null}
+            type="version"
           />
           <Dropdown
             title={`Chapter ${bookChapter}`}
             options={chapterOptions}
-            action={null}
+            type="chapter"
           />
         </div>
       </div>

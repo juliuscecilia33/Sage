@@ -41,6 +41,8 @@ export default function Main({ user }: ClientComponentProps) {
     setBookChapter,
     setChapterData,
     chapterData,
+    setIsLoading,
+    isLoading,
   } = useCurrentBookDataContext();
 
   console.log("user info: ", user);
@@ -53,7 +55,14 @@ export default function Main({ user }: ClientComponentProps) {
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
-    fetchChapterData(key, params, setChapterData, setChapterCount, setBookName);
+    fetchChapterData(
+      key,
+      params,
+      setChapterData,
+      setChapterCount,
+      setBookName,
+      setIsLoading
+    );
   }, [
     bibleVersion,
     bookName,
@@ -83,7 +92,7 @@ export default function Main({ user }: ClientComponentProps) {
             <h1 className={`${titleFont.className} readerTitle mb-3`}>
               Chapter {bookChapter}
             </h1>
-            {chapterData
+            {!isLoading && chapterData
               ? chapterData.map((verse: any) => (
                   <p
                     className={`${paragraphFont.className} readerDescription mb-3`}

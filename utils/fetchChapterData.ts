@@ -17,9 +17,13 @@ export const fetchChapterData = async (
   params: ChapterData,
   setChapterData: (data: any) => void,
   setChapterCount: (count: number) => void,
-  setBookName: (name: string) => void
+  setBookName: (name: string) => void,
+  setIsLoading: (newValue: boolean) => void
 ) => {
   // Context
+
+  // TODO: Add a loading state and put it in context too
+  setIsLoading(true);
 
   try {
     // Attempt to get data from localStorage
@@ -62,5 +66,7 @@ export const fetchChapterData = async (
     }
   } catch (error) {
     console.error("Error fetching verse data:", error);
+  } finally {
+    setIsLoading(false);
   }
 };

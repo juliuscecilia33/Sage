@@ -6,7 +6,20 @@ import { getBookNamesArray } from "@/utils/getBookId";
 import BooksDropdown from "../Buttons/BooksDropdown";
 
 const Navbar = () => {
-  const { bookName } = useCurrentBookDataContext();
+  const {
+    chapterCount,
+    setChapterCount,
+    bookName,
+    setBookName,
+    bibleVersion,
+    bookChapter,
+    setBibleVersion,
+    setBookChapter,
+    setChapterData,
+    chapterData,
+    isLoading,
+    setIsLoading,
+  } = useCurrentBookDataContext();
 
   const booksArray: string[] = getBookNamesArray();
 
@@ -14,6 +27,7 @@ const Navbar = () => {
     <div className="px-4 pt-4 flex flex-row w-full justify-between items-center">
       <button
         className={`${paragraphFont.className} flex justify-center items-center px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FEF2EE] text-[#956E60]`}
+        onClick={() => {}}
       >
         <FaChevronLeft className="mr-1" />
         Revelation

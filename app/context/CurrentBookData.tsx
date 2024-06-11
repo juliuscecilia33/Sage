@@ -21,6 +21,8 @@ interface CurrentBookDataValue {
   setBookChapter: (newValue: number) => void;
   chapterData: any;
   setChapterData: (newValue: any) => void;
+  isLoading: boolean;
+  setIsLoading: (newValue: boolean) => void;
 }
 
 const CurrentBookDataContext = createContext<CurrentBookDataValue | undefined>(
@@ -51,6 +53,7 @@ export const CurrentBookDataContextProvider: React.FC<
   // TODO: this should be set to a value from local storage, and if it doesn't exist in local storage, then set it to this default value
   const [bookChapter, setBookChapter] = useState<number>(1);
   const [chapterData, setChapterData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   // Use useMemo to memoize the context value
   const contextValue = useMemo(
@@ -65,6 +68,8 @@ export const CurrentBookDataContextProvider: React.FC<
       setBookChapter,
       chapterData,
       setChapterData,
+      isLoading,
+      setIsLoading,
     }),
     [
       chapterCount,
@@ -75,6 +80,8 @@ export const CurrentBookDataContextProvider: React.FC<
       setBookChapter,
       chapterData,
       setChapterData,
+      isLoading,
+      setIsLoading,
     ]
   );
 
