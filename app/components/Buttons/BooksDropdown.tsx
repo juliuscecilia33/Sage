@@ -29,6 +29,8 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
     bookChapter,
     setChapterData,
     setIsLoading,
+    setBookChapter,
+    setBibleVersion
   } = useCurrentBookDataContext();
 
   return (
@@ -75,7 +77,7 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
                   const params: ChapterData = {
                     version: bibleVersion,
                     book: book,
-                    chapter: bookChapter,
+                    chapter: 1,
                   };
 
                   const key = generateKey(
@@ -90,7 +92,9 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
                     setChapterData,
                     setChapterCount,
                     setBookName,
-                    setIsLoading
+                    setIsLoading,
+                    setBookChapter,
+                    setBibleVersion
                   );
                 }}
               >

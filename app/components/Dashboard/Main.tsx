@@ -61,7 +61,9 @@ export default function Main({ user }: ClientComponentProps) {
       setChapterData,
       setChapterCount,
       setBookName,
-      setIsLoading
+      setIsLoading,
+      setBookChapter,
+      setBibleVersion
     );
   }, [
     bibleVersion,

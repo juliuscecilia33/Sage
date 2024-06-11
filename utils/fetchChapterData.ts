@@ -18,7 +18,9 @@ export const fetchChapterData = async (
   setChapterData: (data: any) => void,
   setChapterCount: (count: number) => void,
   setBookName: (name: string) => void,
-  setIsLoading: (newValue: boolean) => void
+  setIsLoading: (newValue: boolean) => void,
+  setBookChapter: (count: number) => void,
+  setBibleVersion: (name: string) => void
 ) => {
   // Context
 
@@ -37,6 +39,7 @@ export const fetchChapterData = async (
       setChapterData(storedData);
       setChapterCount(chapterCountFromLocalStorage);
       setBookName(storedData[0].book.name);
+      setBookChapter(storedData[0].chapterId);
 
       return storedData;
     } else {
@@ -61,6 +64,7 @@ export const fetchChapterData = async (
       saveDataToLocalStorage(key + "-chapterCount", chapterCountFromAPI.data);
       setChapterCount(chapterCountFromAPI.data);
       setBookName(response.data[0].book.name);
+      setBookChapter(response.data[0].chapterId);
       console.log("Chapter Data not from local session: ", response.data);
       return response.data;
     }

@@ -30,6 +30,8 @@ const Dropdown = ({ title, options, type }: DropdownProps) => {
     setChapterData,
     bookName,
     setIsLoading,
+    setBookChapter,
+    setBibleVersion
   } = useCurrentBookDataContext();
 
   return (
@@ -74,7 +76,9 @@ const Dropdown = ({ title, options, type }: DropdownProps) => {
                       setChapterData,
                       setChapterCount,
                       setBookName,
-                      setIsLoading
+                      setIsLoading,
+                      setBookChapter,
+                      setBibleVersion
                     );
                   } else if (type === "chapter") {
                     const params: ChapterData = {
@@ -95,7 +99,9 @@ const Dropdown = ({ title, options, type }: DropdownProps) => {
                       setChapterData,
                       setChapterCount,
                       setBookName,
-                      setIsLoading
+                      setIsLoading,
+                      setBookChapter,
+                      setBibleVersion
                     );
                   }
 
