@@ -1,5 +1,3 @@
-import AuthForm from "./components/AuthForm";
-
 export default function Home() {
   return (
     <div>
@@ -7,7 +5,7 @@ export default function Home() {
         <h1>Welcome to Sage</h1>
       </div>
       <div>
-        <AuthForm />
+        <button>Click here to enter cool Dashboard</button>
       </div>
     </div>
   );
