@@ -77,7 +77,9 @@ export default function Main() {
   return (
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">
-        <button onClick={() => logout()}>Sign Out</button>
+        <form action={() => logout()} method="post">
+          <button type="submit">Sign Out</button>
+        </form>
       </div>
       <div className={`w-4/6 ${colors.primary.default}`}>
         <Navbar />

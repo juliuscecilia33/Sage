@@ -14,6 +14,8 @@ export async function logout() {
     redirect("/error");
   }
 
+  console.log("logged out");
+
   revalidatePath("/", "layout");
   redirect("/");
 }
