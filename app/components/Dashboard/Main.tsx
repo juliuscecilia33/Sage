@@ -16,6 +16,7 @@ import { generateKey } from "@/utils/generateKey";
 
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { logout } from "@/app/logout/actions";
 
 // Interfaces
 interface ChapterData {
@@ -24,11 +25,7 @@ interface ChapterData {
   version: string;
 }
 
-interface ClientComponentProps {
-  user: any;
-}
-
-export default function Main({ user }: ClientComponentProps) {
+export default function Main() {
   // Context
   const {
     chapterCount,
@@ -44,8 +41,6 @@ export default function Main({ user }: ClientComponentProps) {
     setIsLoading,
     isLoading,
   } = useCurrentBookDataContext();
-
-  console.log("user info: ", user);
 
   useEffect(() => {
     const params: ChapterData = {
@@ -82,9 +77,7 @@ export default function Main({ user }: ClientComponentProps) {
   return (
     <div className="flex w-full h-full">
       <div className="w-1/6 bg-blue-500 h-full">
-        <form action="/auth/signout" method="post">
-          <button type="submit">Sign Out</button>
-        </form>
+        <button onClick={() => logout()}>Sign Out</button>
       </div>
       <div className={`w-4/6 ${colors.primary.default}`}>
         <Navbar />
