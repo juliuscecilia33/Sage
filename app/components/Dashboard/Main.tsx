@@ -25,7 +25,7 @@ interface ChapterData {
   version: string;
 }
 
-export default function Main() {
+export default function Main({ user }: any) {
   // Context
   const {
     chapterCount,
