@@ -50,6 +50,8 @@ export default function Main({ user }: any) {
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
+    // TODO: You can add to Recently Read dropdown
+
     fetchChapterData(
       key,
       params,
