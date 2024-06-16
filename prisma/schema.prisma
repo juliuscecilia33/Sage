@@ -7,7 +7,31 @@ datasource db {
   url               = env("DATABASE_URL")
 }
 
-model Todo {
-  id Int @id @default(autoincrement())
-  title String
+model Profile {
+  id        String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String  @unique @db.Uuid // User ID from Supabase auth.users
+  fullName  String?
+  bio       String?
+  age       Int?    // Example of an integer field
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relation to posts
+  sideNotes SideNotes[]
+}
+
+model SideNotes {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @db.Uuid // User ID from Supabase auth.users
+  title       String
+  description String?
+  book        String
+  chapter     Int
+  Verse       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user Profile @relation(fields: [userId], references: [userId])
+
+  @@index([userId])
 }
