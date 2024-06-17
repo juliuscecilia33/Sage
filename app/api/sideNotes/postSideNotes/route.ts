@@ -17,7 +17,7 @@ export default async function handler(
           description,
           book,
           chapter,
-          verse,
+          verse, // Ensure this matches the schema
         },
       });
       res.status(201).json(newSideNote);
