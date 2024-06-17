@@ -27,7 +27,7 @@ model SideNotes {
   description String?
   book        String
   chapter     Int
-  Verse       Int
+  verse       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
