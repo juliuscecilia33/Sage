@@ -1,30 +1,31 @@
-import { NextApiRequest, NextApiResponse } from "next";
+// app/api/sideNotes/postSideNotes/route.ts
+
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "POST") {
-    const { userId, title, description, book, chapter, verse } = req.body;
-    try {
-      const newSideNote = await prisma.sideNotes.create({
-        data: {
-          userId,
-          title,
-          description,
-          book,
-          chapter,
-          verse, // Ensure this matches the schema
-        },
-      });
-      res.status(201).json(newSideNote);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to create side note" });
-    }
-  } else {
-    res.status(405).json({ error: "Method not allowed" });
+export async function POST(request: Request) {
+  const { userId, title, description, book, chapter, verse } =
+    await request.json();
+
+  try {
+    const newSideNote = await prisma.sideNotes.create({
+      data: {
+        userId,
+        title,
+        description,
+        book,
+        chapter,
+        verse,
+      },
+    });
+    return NextResponse.json(newSideNote, { status: 201 });
+  } catch (error) {
+    console.error("Failed to create side note:", error);
+    return NextResponse.json(
+      { error: "Failed to create side note" },
+      { status: 500 }
+    );
   }
 }

@@ -1,24 +1,23 @@
-import { NextApiRequest, NextApiResponse } from "next";
+// app/api/sideNotes/getSideNotes/route.ts
+
+import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "GET") {
-    try {
-      const sideNotes = await prisma.sideNotes.findMany({
-        include: {
-          user: true, // Include related profile
-        },
-      });
-      res.status(200).json(sideNotes);
-    } catch (error) {
-      res.status(500).json({ error: "Failed to fetch side notes" });
-    }
-  } else {
-    res.status(405).json({ error: "Method not allowed" });
+export async function GET() {
+  try {
+    const sideNotes = await prisma.sideNotes.findMany({
+      include: {
+        user: true,
+      },
+    });
+    return NextResponse.json(sideNotes);
+  } catch (error) {
+    console.error("Failed to retrieve side notes:", error);
+    return NextResponse.json(
+      { error: "Failed to retrieve side notes" },
+      { status: 500 }
+    );
   }
 }
