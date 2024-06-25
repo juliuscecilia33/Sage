@@ -113,16 +113,16 @@ export default function Main({ user }: any) {
           </div>
         </div>
       </div>
-      <div className={`w-1/6 h-full py-4 px-1.5 `}>
+      <div className={`w-1/6 h-full py-4 px-2 `}>
         <div className="w-full flex-col flex justify-center items-center">
           <div className="w-full flex flex-row items-center mb-4">
             <button
-              className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+              className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5] w-1/2`}
             >
               Book
             </button>
             <button
-              className={`${paragraphFont.className} transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+              className={`${paragraphFont.className} transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5] w-1/2`}
             >
               Chapter
             </button>
