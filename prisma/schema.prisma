@@ -14,7 +14,7 @@ model Profile {
   bio       String?
   age       Int?    // Example of an integer field
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @default(now())
 
   // Relation to posts
   sideNotes SideNotes[]
