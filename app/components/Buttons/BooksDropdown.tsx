@@ -30,7 +30,7 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
     setChapterData,
     setIsLoading,
     setBookChapter,
-    setBibleVersion
+    setBibleVersion,
   } = useCurrentBookDataContext();
 
   return (
@@ -38,7 +38,7 @@ const BooksDropdown = ({ title, options, action }: BooksDropdownProps) => {
       <div>
         <button
           type="button"
-          className={`${paragraphFont.className} inline-flex justify-center items-center w-full rounded-md px-4 py-1.5 text-sm font-inter font-medium rounded-sm font-archivo bg-[#FBFCFD] text-[#B5B5B5]`}
+          className={`${paragraphFont.className} transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {title}

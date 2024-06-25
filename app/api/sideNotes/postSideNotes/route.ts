@@ -32,3 +32,5 @@ export async function POST(request: Request) {
 
 // npx prisma generate
 // npx prisma migrate dev -- name [name]
+
+// TODO: Enable RLS

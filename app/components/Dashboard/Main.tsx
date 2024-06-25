@@ -17,6 +17,8 @@ import { generateKey } from "@/utils/generateKey";
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { logout } from "@/app/logout/actions";
+import { IoIosCreate } from "react-icons/io";
+import Modal from "../SideNotes/Modal";
 
 // Interfaces
 interface ChapterData {
@@ -41,6 +43,12 @@ export default function Main({ user }: any) {
     setIsLoading,
     isLoading,
   } = useCurrentBookDataContext();
+
+  const [isBookSideNotes, setIsBookSideNotes] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   useEffect(() => {
     const params: ChapterData = {
@@ -105,7 +113,30 @@ export default function Main({ user }: any) {
           </div>
         </div>
       </div>
-      <div className={`w-1/6 h-full`}>test</div>
+      <div className={`w-1/6 h-full py-4 px-1.5 `}>
+        <div className="w-full flex-col flex justify-center items-center">
+          <div className="w-full flex flex-row items-center mb-4">
+            <button
+              className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+            >
+              Book
+            </button>
+            <button
+              className={`${paragraphFont.className} transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border flex justify-center items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+            >
+              Chapter
+            </button>
+          </div>
+          <button
+            onClick={openModal}
+            className={`${paragraphFont.className} w-full transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#FEF2EE] flex justify-between items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FEF2EE] text-[#956E60]`}
+          >
+            Add Note
+            <IoIosCreate size={25} />
+          </button>
+          <Modal show={showModal} onClose={closeModal} />
+        </div>
+      </div>
     </div>
   );
 }
