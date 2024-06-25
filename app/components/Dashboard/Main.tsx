@@ -105,7 +105,7 @@ export default function Main({ user }: any) {
           </div>
         </div>
       </div>
-      <div className={`w-1/6 bg-blue-500 h-full`}>test</div>
+      <div className={`w-1/6 h-full`}>test</div>
     </div>
   );
 }

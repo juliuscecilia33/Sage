@@ -17,10 +17,26 @@ model Profile {
   updatedAt DateTime @default(now())
 
   // Relation to posts
-  sideNotes SideNotes[]
+  sideNotesBook SideNotesBook[]
+  sideNotesChapter SideNotesChapter[]
 }
 
-model SideNotes {
+model SideNotesBook {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @db.Uuid // User ID from Supabase auth.users
+  title       String
+  description String?
+  book        String
+  verse       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user Profile @relation(fields: [userId], references: [userId])
+
+  @@index([userId])
+}
+
+model SideNotesChapter {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId      String   @db.Uuid // User ID from Supabase auth.users
   title       String
