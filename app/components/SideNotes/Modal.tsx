@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { MdClose } from "react-icons/md";
 import { paragraphFont, titleFont } from "@/utils/fonts";
+import { FaChevronDown } from "react-icons/fa";
 
 interface ModalProps {
   show: boolean;
@@ -29,7 +30,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
             <MdClose size={30} />
           </button>
         </div>
-        <div className="flex flex-col rounded my-8 bg-white w-full px-10 pt-6 pb-10">
+        <div className="flex flex-col rounded mt-4 mb-4 bg-white w-full px-10 pt-6 pb-10">
           <input
             className="mb-2 p-4 font-bold text-3xl text-black border-none outline-none focus:ring-0 placeholder:text-3xl placeholder:font-bold"
             id="title"
@@ -39,12 +40,38 @@ const Modal = ({ show, onClose }: ModalProps) => {
             required
           />
           <textarea
-            className="p-4 font-medium text-md text-black border-none outline-none focus:ring-0 placeholder:text-md placeholder:font-medium resize-none"
+            className="h-40 p-4 font-medium text-md text-black border-none outline-none focus:ring-0 placeholder:text-md placeholder:font-medium resize-none"
             id="title"
             name="title"
             placeholder="Description"
             required
           />
+        </div>
+        <div className="flex items-center mb-8">
+          <div className="flex rounded bg-white px-4 py-3 mr-4 items-center">
+            <div className="w-10 h-10 bg-blue-500 rounded-full mr-4"></div>
+            <div className="w-10 h-10 bg-blue-500 rounded-full mr-4"></div>
+            <div className="w-10 h-10 bg-blue-500 rounded-full mr-4"></div>
+            <div className="w-10 h-10 bg-blue-500 rounded-full mr-4"></div>
+            <div className="w-10 h-10 bg-blue-500 rounded-full mr-4"></div>
+            <div className="w-10 h-10 bg-blue-500 rounded-full"></div>
+          </div>
+          <div className="flex rounded bg-white px-3 py-3">
+            <button
+              type="button"
+              className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-6 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+            >
+              Private
+              <FaChevronDown className="ml-2" />
+            </button>
+            <button
+              type="button"
+              className={`${paragraphFont.className} transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-6 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+            >
+              Add To
+              <FaChevronDown className="ml-2" />
+            </button>
+          </div>
         </div>
         <div className="w-full flex justify-between items-center">
           <button
