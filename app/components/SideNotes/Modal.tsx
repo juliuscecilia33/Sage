@@ -1,7 +1,8 @@
-import { FC } from "react";
+import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
 interface ModalProps {
   show: boolean;
@@ -11,9 +12,49 @@ interface ModalProps {
 const Modal = ({ show, onClose }: ModalProps) => {
   if (!show) return null;
 
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [book, setBook] = useState("");
+  const [chapter, setChapter] = useState<number>(0);
+  const [verse, setVerse] = useState<number>(0);
+
+  const { userId } = useCurrentBookDataContext();
+
+  console.log("modal userid", userId);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const sideNoteData = {
+      userId: "4de131d1-dcd7-4aff-95e5-3c8e2b132725", // Replace this with the actual user ID from Supabase auth
+      title,
+      description,
+      book,
+      chapter,
+      verse,
+    };
+
+    const response = await fetch("/api/sideNotes/postSideNotes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(sideNoteData),
+    });
+
+    if (response.ok) {
+      console.log("pushed data", response);
+      // Redirect or show a success message
+      //   router.push("/da");
+    } else {
+      // Handle error
+      console.error("Failed to create side note");
+    }
+  };
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-16">
+      <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-16">
         <div className="flex justify-between items-center">
           <div className={`flex items-center`}>
             <h3 className="text-3xl font-bold text-[#11181C]">Create a Note</h3>
@@ -98,6 +139,9 @@ const Modal = ({ show, onClose }: ModalProps) => {
             Add Note
           </button>
         </div>
+      </div>
+      <div className="bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-1/5 p-10">
+        <h3 className="text-xl font-bold text-[#11181C]">Community Notes</h3>
       </div>
     </div>
   );
