@@ -26,7 +26,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
     event.preventDefault();
 
     const sideNoteData = {
-      userId: "4de131d1-dcd7-4aff-95e5-3c8e2b132725", // Replace this with the actual user ID from Supabase auth
+      userId: userId, // Replace this with the actual user ID from Supabase auth
       title,
       description,
       book,
