@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 export async function GET() {
   try {
-    const sideNotes = await prisma.sideNotes.findMany({
+    const sideNotes = await prisma.sideNotesBook.findMany({
       include: {
         user: true,
       },

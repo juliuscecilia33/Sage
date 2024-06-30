@@ -1,23 +1,33 @@
-// app/api/sideNotes/postSideNotes/route.ts
-
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Prisma } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
-  const { userId, title, description, book, chapter, verse } =
-    await request.json();
+  const {
+    userId,
+    title,
+    description,
+    book,
+    verse,
+    userTheme,
+    isPrivate,
+    workspaceId,
+  } = await request.json();
 
   try {
-    const newSideNote = await prisma.sideNotes.create({
+    const newSideNote = await prisma.sideNotesBook.create({
       data: {
         userId,
         title,
         description,
         book,
-        chapter,
         verse,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        userTheme,
+        isPrivate,
+        workspaceId,
       },
     });
     return NextResponse.json(newSideNote, { status: 201 });

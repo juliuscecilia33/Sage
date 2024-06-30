@@ -17,21 +17,27 @@ const Modal = ({ show, onClose }: ModalProps) => {
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState<number>(0);
   const [verse, setVerse] = useState<number>(0);
+  const [userTheme, setUserTheme] = useState<string>("");
+  const [isPrivate, setIsPrivate] = useState<boolean>(true);
+  const [workspaceId, setwWorkspaceId] = useState<any>(null);
 
   const { userId } = useCurrentBookDataContext();
 
   console.log("modal userid", userId);
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
     const sideNoteData = {
-      userId: userId, // Replace this with the actual user ID from Supabase auth
+      userId,
       title,
       description,
       book,
       chapter,
       verse,
+      userTheme,
+      isPrivate,
+      workspaceId,
     };
 
     const response = await fetch("/api/sideNotes/postSideNotes", {
@@ -44,6 +50,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
 
     if (response.ok) {
       console.log("pushed data", response);
+      onClose();
       // Redirect or show a success message
       //   router.push("/da");
     } else {
@@ -78,6 +85,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
             name="title"
             type="text"
             placeholder="Untitled"
+            onChange={(e) => setTitle(e.target.value)}
             required
           />
           <textarea
@@ -85,7 +93,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
             id="title"
             name="title"
             placeholder="Description"
-            required
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
         <div className="flex items-center mb-8">
@@ -133,7 +141,7 @@ const Modal = ({ show, onClose }: ModalProps) => {
             Cancel
           </button>
           <button
-            type="submit"
+            onClick={handleSubmit}
             className="transition inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#956E60] hover:bg-[#7F5C4F]"
           >
             Add Note
