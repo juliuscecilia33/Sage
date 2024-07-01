@@ -10,7 +10,7 @@ import Hero from "./Hero";
 import { colors } from "../../../utils/colors";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 
-import { fetchChapterData } from "@/utils/fetchChapterData";
+import { fetchChapterData } from "@/utils/data/fetchChapterData";
 
 import { generateKey } from "@/utils/generateKey";
 
@@ -19,6 +19,7 @@ import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { logout } from "@/app/logout/actions";
 import { IoIosCreate } from "react-icons/io";
 import Modal from "../SideNotes/Modal";
+import { getSideNotesBook } from "@/utils/data/fetchSideNotesBook";
 
 // Interfaces
 interface ChapterData {
@@ -46,6 +47,8 @@ export default function Main({ user }: any) {
 
   const [isBookSideNotes, setIsBookSideNotes] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [sideNotesBook, setSideNotesBook] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -57,6 +60,18 @@ export default function Main({ user }: any) {
       chapter: bookChapter,
     };
     const key = generateKey(params.version, params.book, params.chapter);
+
+    async function fetchSideNotes() {
+      try {
+        const data = await getSideNotesBook();
+        setSideNotesBook(data);
+      } catch (error) {
+        setError("Failed to retrieve side notes");
+        console.log("Failed to retrieve side notes");
+      }
+    }
+
+    fetchSideNotes();
 
     // TODO: You can add to Recently Read dropdown
 
@@ -83,6 +98,7 @@ export default function Main({ user }: any) {
   console.log("chapter count context", chapterCount);
   console.log("chapter context", bookChapter);
   console.log("book name from context", bookName);
+  console.log("sidenotes book: ", sideNotesBook);
 
   return (
     <div className="flex w-full h-full">

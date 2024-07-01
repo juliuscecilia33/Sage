@@ -10,7 +10,7 @@ interface ChapterData {
 import {
   saveDataToLocalStorage,
   getDataFromLocalStorage,
-} from "../utils/localStorage";
+} from "../localStorage";
 
 export const fetchChapterData = async (
   key: string,

@@ -3,7 +3,7 @@ import { useState, useRef, FocusEvent } from "react";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { fetchChapterData } from "@/utils/fetchChapterData";
+import { fetchChapterData } from "@/utils/data/fetchChapterData";
 import { generateKey } from "@/utils/generateKey";
 
 type DropdownProps = {

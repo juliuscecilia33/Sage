@@ -16,7 +16,7 @@ const Note = () => {
 
   const { userId } = useCurrentBookDataContext();
 
-  return <></>;
+  return <div className="w-full p-2 bg-[#FBFCFD]"></div>;
 };
 
 export default Note;
