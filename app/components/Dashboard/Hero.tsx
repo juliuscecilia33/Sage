@@ -11,7 +11,7 @@ import { MdStickyNote2 } from "react-icons/md";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import Dropdown from "../Buttons/Dropdown";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { generateStringArray } from "@/utils/generateStringArray";
+import { generateStringArray } from "@/utils/generate/generateStringArray";
 
 const BibleVersions = [
   "ASV",

@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import { paragraphFont, titleFont } from "@/utils/fonts";
-import { FaChevronDown } from "react-icons/fa";
+import { IoLocate } from "react-icons/io5";
+import { MdExpand } from "react-icons/md";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { formatTimestamp } from "@/utils/dateUtils";
 
 const Note = ({ noteData }: any) => {
-  const { userId } = useCurrentBookDataContext();
+  const formattedDate = formatTimestamp(noteData.createdAt);
+  console.log("note date: ", noteData.title);
 
   return (
-    <div className="w-full p-2 bg-[#FBFCFD] flex flex-column">
+    <div className="rounded text-black w-full p-2 bg-[#FBFCFD] flex flex-col border border-[#956E60]">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <div className="w-10 h-10 bg-blue-500 rounded-full mr-3"></div>
@@ -17,6 +20,13 @@ const Note = ({ noteData }: any) => {
         <p className="text-[#B5B5B5] text-left font-light my-4">1:2</p>
       </div>
       <p>{noteData.description}</p>
+      <div className="flex justify-between items-center">
+        <p className="text-[#B5B5B5] font-light my-4">{formattedDate}</p>
+        <div className="flex items-center">
+          <IoLocate className="mr-2" />
+          <MdExpand />
+        </div>
+      </div>
     </div>
   );
 };
