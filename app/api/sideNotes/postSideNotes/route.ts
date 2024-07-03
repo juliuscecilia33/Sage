@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         workspaceId,
       },
     });
-    return NextResponse.json(newSideNote, { status: 201 });
+    return NextResponse.json({ newSideNote }, { status: 201 });
   } catch (error) {
     console.error("Failed to create side note:", error);
     return NextResponse.json(

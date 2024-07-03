@@ -7,9 +7,11 @@ import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 interface ModalProps {
   show: boolean;
   onClose: () => void;
+  previousNotes: any;
+  setNotes: any;
 }
 
-const Modal = ({ show, onClose }: ModalProps) => {
+const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
   if (!show) return null;
 
   const [title, setTitle] = useState("");
@@ -49,10 +51,15 @@ const Modal = ({ show, onClose }: ModalProps) => {
     });
 
     if (response.ok) {
-      console.log("pushed data", response);
+      const data = await response.json();
+
+      if (data) {
+        console.log("data inside the if condition", data);
+        setNotes([...previousNotes, data.newSideNote]);
+      }
+
       onClose();
       // Redirect or show a success message
-      //   router.push("/da");
     } else {
       // Handle error
       console.error("Failed to create side note");

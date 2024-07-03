@@ -151,7 +151,12 @@ export default function Main({ user }: any) {
             Add Note
             <IoIosCreate size={25} />
           </button>
-          <Modal show={showModal} onClose={closeModal} />
+          <Modal
+            show={showModal}
+            onClose={closeModal}
+            previousNotes={sideNotesBook}
+            setNotes={setSideNotesBook}
+          />
           <p className="text-[#B5B5B5] text-left font-light my-4">
             Your Notes:
           </p>
