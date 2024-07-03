@@ -103,12 +103,12 @@ export default function Main({ user }: any) {
 
   return (
     <div className="flex w-full h-full">
-      <div className="w-1/6 bg-blue-500 h-full">
+      <div className="w-[20%] bg-blue-500 h-full">
         <form action={() => logout()} method="post">
           <button type="submit">Sign Out</button>
         </form>
       </div>
-      <div className={`w-4/6 ${colors.primary.default}`}>
+      <div className={`w-[60%] ${colors.primary.default}`}>
         <Navbar />
         <Hero />
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
@@ -130,7 +130,7 @@ export default function Main({ user }: any) {
           </div>
         </div>
       </div>
-      <div className={`w-1/6 h-full py-4 px-3 `}>
+      <div className={`w-[20%] h-full py-4 px-3 `}>
         <div className="w-full flex-col flex justify-center">
           <div className="w-full flex flex-row items-center mb-4">
             <button
