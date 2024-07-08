@@ -1,5 +1,5 @@
 export async function getSideNotesBook() {
-  const response = await fetch("/api/sideNotes/getSideNotesBook");
+  const response = await fetch("/api/sideNotes/book/getSideNotesBook");
   if (!response.ok) {
     throw new Error("Failed to retrieve side notes");
   }

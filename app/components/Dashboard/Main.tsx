@@ -19,7 +19,7 @@ import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { logout } from "@/app/logout/actions";
 import { IoIosCreate } from "react-icons/io";
 import Modal from "../SideNotes/Modal";
-import { getSideNotesBook } from "@/utils/data/fetchSideNotesBook";
+import { getSideNotesBook } from "@/utils/data/sideNotes/book/fetchSideNotesBook";
 import Note from "../SideNotes/Note";
 
 // Interfaces
@@ -103,12 +103,17 @@ export default function Main({ user }: any) {
 
   return (
     <div className="flex w-full h-full">
-      <div className="w-[20%] bg-blue-500 h-full">
+      <div className="w-[18%] h-full py-4 px-3">
         <form action={() => logout()} method="post">
-          <button type="submit">Sign Out</button>
+          <button
+            className={`${paragraphFont.className} w-full transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#FEF2EE] flex justify-between items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FEF2EE] text-[#956E60]`}
+            type="submit"
+          >
+            Sign Out
+          </button>
         </form>
       </div>
-      <div className={`w-[60%] ${colors.primary.default}`}>
+      <div className={`w-[64%] ${colors.primary.default}`}>
         <Navbar />
         <Hero />
         <div className={`w-full bg-[#FBFCFD] p-10 flex flex-col`}>
@@ -130,7 +135,7 @@ export default function Main({ user }: any) {
           </div>
         </div>
       </div>
-      <div className={`w-[20%] h-full py-4 px-3 `}>
+      <div className={`w-[18%] h-full py-4 px-3 `}>
         <div className="w-full flex-col flex justify-center">
           <div className="w-full flex flex-row items-center mb-4">
             <button

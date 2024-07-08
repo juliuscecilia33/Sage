@@ -3,12 +3,28 @@ import { MdClose } from "react-icons/md";
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { Dispatch, SetStateAction } from "react";
+
+interface SideNote {
+  id: number;
+  title: string;
+  description: string;
+  book: string;
+  verse: string;
+  userTheme: string;
+  isPrivate: boolean;
+  workspaceId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
 interface ModalProps {
   show: boolean;
   onClose: () => void;
   previousNotes: any;
-  setNotes: any;
+  setNotes: any; // TODO: SetSideNotesBook; Revise all types not to be "any"
 }
 
 const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
@@ -42,7 +58,7 @@ const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
       workspaceId,
     };
 
-    const response = await fetch("/api/sideNotes/postSideNotes", {
+    const response = await fetch("/api/sideNotes/book/postSideNotes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

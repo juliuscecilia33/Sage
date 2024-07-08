@@ -11,17 +11,19 @@ const Note = ({ noteData }: any) => {
   console.log("note date: ", noteData.title);
 
   return (
-    <div className="rounded text-black w-full p-2 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
+    <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
-          <div className="w-10 h-10 bg-blue-500 rounded-full mr-3"></div>
+          <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
           <p>{noteData.title}</p>
         </div>
         <p className="text-[#B5B5B5] text-left font-light my-4">1:2</p>
       </div>
       <p>{noteData.description}</p>
       <div className="flex justify-between items-center">
-        <p className="text-[#B5B5B5] font-light my-4">{formattedDate}</p>
+        <p className="text-[#B5B5B5] text-xs font-light my-4">
+          {formattedDate}
+        </p>
         <div className="flex items-center">
           <IoLocate className="mr-2" />
           <MdExpand />
