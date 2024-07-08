@@ -24,7 +24,7 @@ interface ModalProps {
   show: boolean;
   onClose: () => void;
   previousNotes: any;
-  setNotes: any; // TODO: SetSideNotesBook; Revise all types not to be "any"
+  setNotes: SetSideNotesBook; // TODO: SetSideNotesBook; Revise all types not to be "any"
 }
 
 const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {

@@ -1,14 +1,35 @@
-import { useState } from "react";
-import { MdClose } from "react-icons/md";
-import { paragraphFont, titleFont } from "@/utils/fonts";
 import { IoLocate } from "react-icons/io5";
-import { MdExpand } from "react-icons/md";
-import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { MdOutlineExpandMore } from "react-icons/md";
 import { formatTimestamp } from "@/utils/dateUtils";
+import { MdModeEditOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { Dispatch, SetStateAction } from "react";
 
-const Note = ({ noteData }: any) => {
+interface SideNote {
+  id: number;
+  title: string;
+  description: string;
+  book: string;
+  verse: string;
+  userTheme: string;
+  isPrivate: boolean;
+  workspaceId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
+
+interface ModalProps {
+  noteData: SideNote;
+  previousNotes: SideNote[];
+  setNotes: SetSideNotesBook; // TODO: SetSideNotesBook; Revise all types not to be "any"
+}
+
+const Note = ({ noteData, previousNotes, setNotes }: any) => {
   const formattedDate = formatTimestamp(noteData.createdAt);
-  console.log("note date: ", noteData.title);
+  console.log("note data: ", noteData);
+  console.log("previousNotes: ", previousNotes);
 
   return (
     <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
@@ -25,8 +46,15 @@ const Note = ({ noteData }: any) => {
           {formattedDate}
         </p>
         <div className="flex items-center">
-          <IoLocate className="mr-2" />
-          <MdExpand />
+          <button className="mr-2 text-[#B5B5B5]">
+            <IoLocate size={20} />
+          </button>
+          <button className="mr-2 text-[#B5B5B5]">
+            <MdModeEditOutline size={20} />
+          </button>
+          <button className="text-[#B5B5B5]">
+            <MdDelete size={20} />
+          </button>
         </div>
       </div>
     </div>

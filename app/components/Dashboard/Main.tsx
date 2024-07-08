@@ -166,7 +166,11 @@ export default function Main({ user }: any) {
             Your Notes:
           </p>
           {sideNotesBook.map((note) => (
-            <Note noteData={note} />
+            <Note
+              noteData={note}
+              previousNotes={sideNotesBook}
+              setNotes={setSideNotesBook}
+            />
           ))}
         </div>
       </div>
