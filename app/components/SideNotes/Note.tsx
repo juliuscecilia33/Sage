@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 import { IoLocate } from "react-icons/io5";
 import { MdOutlineExpandMore } from "react-icons/md";
 import { formatTimestamp } from "@/utils/dateUtils";
@@ -5,6 +7,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
 import { handleDelete } from "@/utils/data/sideNotes/book/deleteSideNotesBook";
+import Modal from "./Modal";
 
 interface SideNote {
   id: string;
@@ -29,8 +32,12 @@ interface ModalProps {
 
 const Note = ({ noteData, previousNotes, setNotes }: any) => {
   const formattedDate = formatTimestamp(noteData.createdAt);
+  const [showModal, setShowModal] = useState(false);
   console.log("note data: ", noteData);
   console.log("previousNotes: ", previousNotes);
+
+  const openModal = () => setShowModal(true);
+  const closeModal = () => setShowModal(false);
 
   return (
     <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
@@ -50,7 +57,7 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
           <button className="mr-2 text-[#B5B5B5]">
             <IoLocate size={20} />
           </button>
-          <button className="mr-2 text-[#B5B5B5]">
+          <button onClick={openModal} className="mr-2 text-[#B5B5B5]">
             <MdModeEditOutline size={20} />
           </button>
           <button
@@ -61,6 +68,15 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
           </button>
         </div>
       </div>
+      <Modal
+        show={showModal}
+        toEdit={true}
+        onClose={closeModal}
+        previousNotes={previousNotes}
+        setNotes={setNotes}
+        prevTitle={noteData.title}
+        prevDescription={noteData.description}
+      />
     </div>
   );
 };
