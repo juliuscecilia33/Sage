@@ -24,14 +24,25 @@ interface ModalProps {
   show: boolean;
   onClose: () => void;
   previousNotes: any;
-  setNotes: SetSideNotesBook; // TODO: SetSideNotesBook; Revise all types not to be "any"
+  setNotes: SetSideNotesBook;
+  toEdit: boolean;
+  prevTitle: string;
+  prevDescription: string;
 }
 
-const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
+const Modal = ({
+  show,
+  onClose,
+  previousNotes,
+  setNotes,
+  toEdit,
+  prevTitle,
+  prevDescription,
+}: ModalProps) => {
   if (!show) return null;
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [title, setTitle] = useState(prevTitle);
+  const [description, setDescription] = useState(prevDescription);
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState<number>(0);
   const [verse, setVerse] = useState<number>(0);
@@ -87,7 +98,9 @@ const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
       <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-16">
         <div className="flex justify-between items-center">
           <div className={`flex items-center`}>
-            <h3 className="text-3xl font-bold text-[#11181C]">Create a Note</h3>
+            <h3 className="text-3xl font-bold text-[#11181C]">
+              {toEdit ? "Edit Your Note" : "Create A Note"}
+            </h3>
             <button
               className={`${paragraphFont.className} ml-3 border border-[#956E60] flex justify-center items-center px-3 py-1.5 text-sm font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
             >
@@ -167,7 +180,7 @@ const Modal = ({ show, onClose, previousNotes, setNotes }: ModalProps) => {
             onClick={handleSubmit}
             className="transition inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#956E60] hover:bg-[#7F5C4F]"
           >
-            Add Note
+            {toEdit ? "Apply Changes" : "Add Note"}
           </button>
         </div>
       </div>

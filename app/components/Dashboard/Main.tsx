@@ -158,9 +158,12 @@ export default function Main({ user }: any) {
           </button>
           <Modal
             show={showModal}
+            toEdit={false}
             onClose={closeModal}
             previousNotes={sideNotesBook}
             setNotes={setSideNotesBook}
+            prevTitle={""}
+            prevDescription={""}
           />
           <p className="text-[#B5B5B5] text-left font-light my-4">
             Your Notes:
