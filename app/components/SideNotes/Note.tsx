@@ -4,9 +4,10 @@ import { formatTimestamp } from "@/utils/dateUtils";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
+import { handleDelete } from "@/utils/data/sideNotes/book/deleteSideNotesBook";
 
 interface SideNote {
-  id: number;
+  id: string;
   title: string;
   description: string;
   book: string;
@@ -52,7 +53,10 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
           <button className="mr-2 text-[#B5B5B5]">
             <MdModeEditOutline size={20} />
           </button>
-          <button className="text-[#B5B5B5]">
+          <button
+            onClick={() => handleDelete(noteData.id, setNotes)}
+            className="text-[#B5B5B5]"
+          >
             <MdDelete size={20} />
           </button>
         </div>

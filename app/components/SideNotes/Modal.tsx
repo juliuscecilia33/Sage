@@ -6,7 +6,7 @@ import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { Dispatch, SetStateAction } from "react";
 
 interface SideNote {
-  id: number;
+  id: string;
   title: string;
   description: string;
   book: string;
