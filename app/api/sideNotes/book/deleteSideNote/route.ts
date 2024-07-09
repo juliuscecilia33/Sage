@@ -13,7 +13,7 @@ export async function DELETE(req: Request, res: NextApiResponse) {
   console.log("delete ID:", id);
 
   if (!id) {
-    res.status(400).json({ error: "ID is required" });
+    return NextResponse.json({ error: "ID" }, { status: 404 });
     return;
   }
 
@@ -22,20 +22,21 @@ export async function DELETE(req: Request, res: NextApiResponse) {
       where: { id: String(id) }, // Convert id to string
     });
 
-    if (!existingSideNote) {
+    if (existingSideNote) {
+      await prisma.sideNotesBook.delete({
+        where: { id: String(id) }, // Convert id to string
+      });
+    } else {
       return NextResponse.json(
         { error: "Side note not found" },
         { status: 404 }
       );
     }
 
-    await prisma.sideNotesBook.delete({
-      where: { id: String(id) }, // Convert id to string
-    });
-
-    res
-      .status(200)
-      .json({ message: `Side note with ID ${id} deleted successfully` });
+    return NextResponse.json(
+      { message: `Side note with ID ${id} deleted successfully` },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("Failed to delete side note:", error);
     return NextResponse.json(
