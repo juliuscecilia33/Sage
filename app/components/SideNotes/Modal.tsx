@@ -41,8 +41,10 @@ const Modal = ({
 }: ModalProps) => {
   if (!show) return null;
 
-  const [title, setTitle] = useState(prevTitle);
-  const [description, setDescription] = useState(prevDescription);
+  const [title, setTitle] = useState(prevTitle ? prevTitle : "");
+  const [description, setDescription] = useState(
+    prevDescription ? prevDescription : ""
+  );
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState<number>(0);
   const [verse, setVerse] = useState<number>(0);
@@ -122,6 +124,7 @@ const Modal = ({
             type="text"
             placeholder="Untitled"
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
             required
           />
           <textarea
@@ -130,6 +133,7 @@ const Modal = ({
             name="title"
             placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
+            value={description}
           />
         </div>
         <div className="flex items-center mb-8">
@@ -184,9 +188,11 @@ const Modal = ({
           </button>
         </div>
       </div>
-      <div className="bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-1/5 p-10">
-        <h3 className="text-xl font-bold text-[#11181C]">Community Notes</h3>
-      </div>
+      {!toEdit ? (
+        <div className="bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-1/5 p-10">
+          <h3 className="text-xl font-bold text-[#11181C]">Community Notes</h3>
+        </div>
+      ) : null}
     </div>
   );
 };
