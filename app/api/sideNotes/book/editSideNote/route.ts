@@ -19,6 +19,8 @@ export async function PUT(req: Request) {
   const { searchParams } = new URL(req.url);
   const id = searchParams.get("id");
 
+  console.log("id", id);
+
   const {
     title,
     description,
@@ -55,7 +57,9 @@ export async function PUT(req: Request) {
       },
     });
 
-    return NextResponse.json({ updatedSideNote });
+    const allSideNotes = await prisma.sideNotesBook.findMany();
+
+    return NextResponse.json({ allSideNotes });
   } catch (error) {
     console.error("Failed to update side note:", error);
     return NextResponse.json(

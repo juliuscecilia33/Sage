@@ -77,7 +77,7 @@ const Modal = ({
 
     try {
       const response = await fetch(
-        `/api/sideNotes/editSideNote/${prevNoteId}`,
+        `/api/sideNotes/book/editSideNote/?id=${prevNoteId}`,
         {
           method: "PUT",
           headers: {
@@ -87,18 +87,15 @@ const Modal = ({
         }
       );
 
-      const result = await response.json();
       if (response.ok) {
         const data = await response.json();
 
         if (data) {
-          console.log("data inside the if condition", data);
-          setNotes([...previousNotes, data.newSideNote]);
+          console.log("edit side note: data inside the if condition", data);
+          setNotes(data.allSideNotes);
         }
 
         onClose();
-      } else {
-        console.error(result.error);
       }
     } catch (error) {
       console.error("Failed to update side note:", error);
