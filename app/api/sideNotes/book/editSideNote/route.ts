@@ -15,8 +15,10 @@ interface SideNoteUpdateData {
   workspaceId?: string;
 }
 
-export async function PUT(request: any) {
-  const { id } = request.query;
+export async function PUT(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const id = searchParams.get("id");
+
   const {
     title,
     description,
@@ -25,7 +27,7 @@ export async function PUT(request: any) {
     userTheme,
     isPrivate,
     workspaceId,
-  }: SideNoteUpdateData = await request.json();
+  }: SideNoteUpdateData = await req.json();
 
   try {
     const existingSideNote = await prisma.sideNotesBook.findUnique({

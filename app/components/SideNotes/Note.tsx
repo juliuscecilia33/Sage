@@ -76,6 +76,7 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
         setNotes={setNotes}
         prevTitle={noteData.title}
         prevDescription={noteData.description}
+        prevNoteId={noteData.id}
       />
     </div>
   );

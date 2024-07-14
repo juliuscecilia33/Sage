@@ -28,6 +28,7 @@ interface ModalProps {
   toEdit: boolean;
   prevTitle: string;
   prevDescription: string;
+  prevNoteId: string;
 }
 
 const Modal = ({
@@ -38,6 +39,7 @@ const Modal = ({
   toEdit,
   prevTitle,
   prevDescription,
+  prevNoteId,
 }: ModalProps) => {
   if (!show) return null;
 
@@ -55,6 +57,53 @@ const Modal = ({
   const { userId } = useCurrentBookDataContext();
 
   console.log("modal userid", userId);
+
+  const handleEditSubmit = async (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+
+    const sideNoteData = {
+      userId,
+      title,
+      description,
+      book,
+      chapter,
+      verse,
+      userTheme,
+      isPrivate,
+      workspaceId,
+    };
+
+    try {
+      const response = await fetch(
+        `/api/sideNotes/editSideNote/${prevNoteId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(sideNoteData),
+        }
+      );
+
+      const result = await response.json();
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data) {
+          console.log("data inside the if condition", data);
+          setNotes([...previousNotes, data.newSideNote]);
+        }
+
+        onClose();
+      } else {
+        console.error(result.error);
+      }
+    } catch (error) {
+      console.error("Failed to update side note:", error);
+    }
+  };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -181,7 +230,7 @@ const Modal = ({
             Cancel
           </button>
           <button
-            onClick={handleSubmit}
+            onClick={toEdit ? handleEditSubmit : handleSubmit}
             className="transition inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#956E60] hover:bg-[#7F5C4F]"
           >
             {toEdit ? "Apply Changes" : "Add Note"}

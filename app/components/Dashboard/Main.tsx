@@ -164,6 +164,7 @@ export default function Main({ user }: any) {
             setNotes={setSideNotesBook}
             prevTitle={""}
             prevDescription={""}
+            prevNoteId={""}
           />
           <p className="text-[#B5B5B5] text-left font-light my-4">
             Your Notes:
