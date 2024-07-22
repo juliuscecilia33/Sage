@@ -16,11 +16,11 @@ import { generateKey } from "@/utils/generate/generateKey";
 
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { logout } from "@/app/logout/actions";
 import { IoIosCreate } from "react-icons/io";
 import Modal from "../SideNotes/Modal";
 import { getSideNotesBook } from "@/utils/data/sideNotes/book/fetchSideNotesBook";
 import Note from "../SideNotes/Note";
+import LeftSection from "./Left/Main";
 
 // Interfaces
 interface ChapterData {
@@ -103,16 +103,7 @@ export default function Main({ user }: any) {
 
   return (
     <div className="flex w-full h-full">
-      <div className="w-[18%] h-full py-4 px-3">
-        <form action={() => logout()} method="post">
-          <button
-            className={`${paragraphFont.className} w-full transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#FEF2EE] flex justify-between items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FEF2EE] text-[#956E60]`}
-            type="submit"
-          >
-            Sign Out
-          </button>
-        </form>
-      </div>
+      <LeftSection />
       <div className={`w-[64%] ${colors.primary.default}`}>
         <Navbar />
         <Hero />
