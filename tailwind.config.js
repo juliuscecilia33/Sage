@@ -33,5 +33,5 @@ module.exports = {
       textColor: ["responsive", "hover", "focus", "active"],
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 };
