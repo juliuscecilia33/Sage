@@ -1,5 +1,5 @@
 import { paragraphFont } from "@/utils/fonts";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
@@ -11,6 +11,19 @@ interface ModalProps {
 
 const ThemesModal = ({ onClose, show }: ModalProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [selectedColor, setSelectedColor] = useState<number | null>(0);
+
+  const buttonColors = [
+    "#B7C467",
+    "#956E60",
+    "#6781C4",
+    "#C467AA",
+    "#FF6161",
+    "#C46772",
+    "#FF6196",
+    "#67C46B",
+    "#FFC961",
+  ];
 
   const themes = [
     {
@@ -50,7 +63,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
   if (!show) return null;
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-16">
+      <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-12">
         <div className="flex justify-between items-center">
           <div className={`flex items-center`}>
             <h3 className="text-2xl font-bold text-[#11181C]">Your Themes</h3>
@@ -62,7 +75,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             <MdClose size={30} />
           </button>
         </div>
-        <div className="my-10 w-full bg-white flex p-10">
+        <div className="my-5 w-full bg-white flex p-10">
           <button onClick={scrollLeft} className="text-[#B5B5B5] mr-5">
             <FaChevronLeft size={20} />
           </button>
@@ -102,7 +115,33 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             <FaChevronRight size={20} />
           </button>
         </div>
-        <div className="w-full flex justify-between items-center">
+        <h3 className="text-2xl font-bold text-[#11181C] mb-5">
+          Create a Theme
+        </h3>
+        <div className="flex w-full items-center mb-10">
+          <input
+            className="rounded-lg mr-5 py-6 px-6 font-light text-base text-black border-none outline-none focus:ring-0 placeholder:text-base placeholder:font-light"
+            id="themeName"
+            name="themeName"
+            type="text"
+            placeholder="Theme Name"
+            onChange={() => {}}
+            value={""}
+            required
+          />
+          <div className="rounded-lg flex items-center space-x-2 bg-white p-4">
+            {buttonColors.map((color, index) => (
+              <button
+                key={index}
+                onClick={() => setSelectedColor(index)}
+                className={`bg-[${color}] w-10 h-10 rounded-full transition-opacity duration-300  ${
+                  selectedColor === index ? "opacity-100" : "opacity-30"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="mt-5 w-full flex justify-between items-center">
           <button
             type="button"
             onClick={onClose}

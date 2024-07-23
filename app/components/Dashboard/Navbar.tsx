@@ -1,25 +1,11 @@
-import { FaChevronRight, FaChevronLeft, FaChevronDown } from "react-icons/fa";
-import { colors } from "../../../utils/colors";
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+import { paragraphFont } from "@/utils/fonts";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { getBookNamesArray } from "@/utils/getBookId";
 import BooksDropdown from "../Buttons/BooksDropdown";
 
 const Navbar = () => {
-  const {
-    chapterCount,
-    setChapterCount,
-    bookName,
-    setBookName,
-    bibleVersion,
-    bookChapter,
-    setBibleVersion,
-    setBookChapter,
-    setChapterData,
-    chapterData,
-    isLoading,
-    setIsLoading,
-  } = useCurrentBookDataContext();
+  const { bookName } = useCurrentBookDataContext();
 
   const booksArray: string[] = getBookNamesArray();
 
