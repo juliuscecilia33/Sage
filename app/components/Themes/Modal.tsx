@@ -14,15 +14,15 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
   const [selectedColor, setSelectedColor] = useState<number | null>(0);
 
   const buttonColors = [
-    "#B7C467",
-    "#956E60",
-    "#6781C4",
-    "#C467AA",
-    "#FF6161",
-    "#C46772",
-    "#FF6196",
-    "#67C46B",
-    "#FFC961",
+    "bg-[#B7C467]",
+    "bg-[#956E60]",
+    "bg-[#6781C4]",
+    "bg-[#C467AA]",
+    "bg-[#FF6161]",
+    "bg-[#C46772]",
+    "bg-[#FF6196]",
+    "bg-[#67C46B]",
+    "bg-[#FFC961]",
   ];
 
   const themes = [
@@ -134,7 +134,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
               <button
                 key={index}
                 onClick={() => setSelectedColor(index)}
-                className={`bg-[${color}] w-10 h-10 rounded-full transition-opacity duration-300  ${
+                className={`${color} w-10 h-10 rounded-full transition-opacity duration-300  ${
                   selectedColor === index ? "opacity-100" : "opacity-30"
                 }`}
               />
