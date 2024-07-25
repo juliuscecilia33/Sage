@@ -4,6 +4,7 @@ import { paragraphFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postSideNotesBook } from "@/utils/data/sideNotes/book/postSideNotesBook";
+import { editSideNotesBook } from "@/utils/data/sideNotes/book/editSideNotesBook";
 
 interface SideNote {
   id: string;
@@ -75,31 +76,7 @@ const Modal = ({
       workspaceId,
     };
 
-    try {
-      const response = await fetch(
-        `/api/sideNotes/book/editSideNote/?id=${prevNoteId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(sideNoteData),
-        }
-      );
-
-      if (response.ok) {
-        const data = await response.json();
-
-        if (data) {
-          console.log("edit side note: data inside the if condition", data);
-          setNotes(data.allSideNotes);
-        }
-
-        onClose();
-      }
-    } catch (error) {
-      console.error("Failed to update side note:", error);
-    }
+    editSideNotesBook({ onClose, setNotes, prevNoteId, sideNoteData });
   };
 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {

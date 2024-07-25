@@ -1,35 +1,37 @@
 interface PostSideNotesBookProps {
   sideNoteData: any;
   onClose: () => void;
-  previousNotes: any;
+  prevNoteId: string;
   setNotes: any;
 }
 
-export async function postSideNotesBook({
+export async function editSideNotesBook({
   onClose,
   setNotes,
-  previousNotes,
+  prevNoteId,
   sideNoteData,
 }: PostSideNotesBookProps) {
   try {
-    const response = await fetch("/api/sideNotes/book/postSideNotes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(sideNoteData),
-    });
+    const response = await fetch(
+      `/api/sideNotes/book/editSideNote/?id=${prevNoteId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sideNoteData),
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();
 
       if (data) {
-        console.log("data inside the if condition", data);
-        setNotes([...previousNotes, data.newSideNote]);
+        console.log("edit side note: data inside the if condition", data);
+        setNotes(data.allSideNotes);
       }
 
       onClose();
-      // Redirect or show a success message
     } else {
       // Handle error
       console.error("Failed to create side note");
