@@ -12,6 +12,8 @@ export async function postSideNotesBook({
   sideNoteData,
 }: PostSideNotesBookProps) {
   try {
+    // TODO: Add loading indicator on button
+
     const response = await fetch("/api/sideNotes/book/postSideNotes", {
       method: "POST",
       headers: {

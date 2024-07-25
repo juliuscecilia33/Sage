@@ -12,6 +12,7 @@ export async function editSideNotesBook({
   sideNoteData,
 }: PostSideNotesBookProps) {
   try {
+    // TODO: Add loading indicator on button
     const response = await fetch(
       `/api/sideNotes/book/editSideNote/?id=${prevNoteId}`,
       {

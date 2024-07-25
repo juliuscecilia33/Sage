@@ -3,6 +3,7 @@ import React, { useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
 interface ModalProps {
   onClose: () => void;
@@ -11,7 +12,60 @@ interface ModalProps {
 
 const ThemesModal = ({ onClose, show }: ModalProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Context
+  const { userId } = useCurrentBookDataContext();
+
+  // States
   const [selectedColor, setSelectedColor] = useState<number | null>(0);
+  const [themeName, setThemeName] = useState<string>("");
+  const [themeDescription, setThemeDescription] = useState<string>("");
+  const [themeColor, setThemeColor] = useState<string>("");
+  const [themeNotesCount, setThemeNotesCount] = useState<number>(0);
+  const [workspaceId, setwWorkspaceId] = useState<any>(null);
+
+  const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+
+    const themeData = {
+      userId,
+      name: themeName,
+      description: themeDescription,
+      themeColor,
+      notesCount: themeNotesCount,
+      workspaceId,
+    };
+
+    // TODO: add input validator to check if values are not null
+
+    try {
+      // TODO: Add loading indicator on button
+
+      const response = await fetch("/api/theme/user/postTheme", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(themeData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        if (data) {
+          console.log("theme data inside the if condition", data);
+        }
+
+        onClose();
+        // Redirect or show a success message
+      } else {
+        // Handle error
+        console.error("Failed to create side note");
+      }
+    } catch (error) {
+      console.error("Failed to update side note:", error);
+    }
+  };
 
   const buttonColors = [
     "bg-[#B7C467]",
@@ -125,15 +179,20 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             name="themeName"
             type="text"
             placeholder="Theme Name"
-            onChange={() => {}}
-            value={""}
+            onChange={(e) => {
+              setThemeName(e.target.value);
+            }}
+            value={themeName}
             required
           />
           <div className="rounded-lg flex items-center space-x-2 bg-white p-4">
             {buttonColors.map((color, index) => (
               <button
                 key={index}
-                onClick={() => setSelectedColor(index)}
+                onClick={() => {
+                  setSelectedColor(index);
+                  setThemeColor(color);
+                }}
                 className={`${color} w-10 h-10 rounded-full transition-opacity duration-300  ${
                   selectedColor === index ? "opacity-100" : "opacity-30"
                 }`}
@@ -147,9 +206,10 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
           name="themeDescription"
           type="text"
           placeholder="Enter Description Here..."
-          onChange={() => {}}
-          value={""}
-          required
+          onChange={(e) => {
+            setThemeDescription(e.target.value);
+          }}
+          value={themeDescription}
         />
         <div className="mt-5 w-full flex justify-between items-center">
           <button
@@ -160,7 +220,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             Cancel
           </button>
           <button
-            onClick={() => {}}
+            onClick={handleSubmit}
             className="transition inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#956E60] hover:bg-[#7F5C4F]"
           >
             Create Theme

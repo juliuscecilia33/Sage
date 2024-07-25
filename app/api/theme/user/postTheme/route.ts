@@ -4,13 +4,13 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export async function POST(request: Request) {
-  const { id, name, description, notesCount, workspaceId, themeColor } =
+  const { userId, name, description, notesCount, workspaceId, themeColor } =
     await request.json();
 
   try {
     const newTheme = await prisma.theme.create({
       data: {
-        id,
+        userId,
         name,
         description,
         createdAt: new Date(),
