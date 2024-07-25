@@ -25,7 +25,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
     "bg-[#FFC961]",
   ];
 
-  const themes = [
+  const sampleThemes = [
     {
       count: 26,
       name: "Worthy is your Name: Jesus",
@@ -84,7 +84,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             ref={scrollRef}
             style={{ scrollSnapType: "x mandatory" }}
           >
-            {themes.map((theme, key) => (
+            {sampleThemes.map((theme, key) => (
               <div
                 key={key}
                 style={{ scrollSnapAlign: "start" }}
@@ -118,9 +118,9 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
         <h3 className="text-2xl font-bold text-[#11181C] mb-5">
           Create a Theme
         </h3>
-        <div className="flex w-full items-center mb-10">
+        <div className="flex w-full items-center mb-3">
           <input
-            className="rounded-lg mr-5 py-6 px-6 font-light text-base text-black border-none outline-none focus:ring-0 placeholder:text-base placeholder:font-light"
+            className="w-[25%] rounded-lg mr-5 py-6 px-6 font-light text-base text-black border-none outline-none focus:ring-0 placeholder:text-base placeholder:font-light"
             id="themeName"
             name="themeName"
             type="text"
@@ -141,6 +141,16 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
             ))}
           </div>
         </div>
+        <input
+          className="mb-10 w-full rounded-lg py-6 px-6 font-light text-base text-black border-none outline-none focus:ring-0 placeholder:text-base placeholder:font-light"
+          id="themeDescription"
+          name="themeDescription"
+          type="text"
+          placeholder="Enter Description Here..."
+          onChange={() => {}}
+          value={""}
+          required
+        />
         <div className="mt-5 w-full flex justify-between items-center">
           <button
             type="button"

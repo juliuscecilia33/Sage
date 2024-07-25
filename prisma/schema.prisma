@@ -21,6 +21,17 @@ model Profile {
   sideNotesChapter SideNotesChapter[]
 }
 
+model Theme {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String?        
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  notesCount  Int     @default(0)
+  workspaceId String? @db.Uuid
+  themeColor  String
+}
+
 model SideNotesBook {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   userId      String   @db.Uuid // User ID from Supabase auth.users
