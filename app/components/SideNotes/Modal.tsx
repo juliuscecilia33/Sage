@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState, Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { paragraphFont } from "@/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { Dispatch, SetStateAction } from "react";
 
 interface SideNote {
   id: string;
