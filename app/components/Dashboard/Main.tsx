@@ -44,7 +44,6 @@ export default function Main({ user }: any) {
     isLoading,
   } = useCurrentBookDataContext();
 
-  const [isBookSideNotes, setIsBookSideNotes] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [sideNotesBook, setSideNotesBook] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);

@@ -16,13 +16,15 @@ model Profile {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
-  // Relation to posts
+  // Relation to posts and Theme
   sideNotesBook SideNotesBook[]
   sideNotesChapter SideNotesChapter[]
+  theme Theme[]
 }
 
 model Theme {
   id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId      String   @db.Uuid // User ID from Supabase auth.users
   name        String
   description String?        
   createdAt   DateTime @default(now())
@@ -30,6 +32,10 @@ model Theme {
   notesCount  Int     @default(0)
   workspaceId String? @db.Uuid
   themeColor  String
+
+  user Profile @relation(fields: [userId], references: [userId])
+
+  @@index([userId])
 }
 
 model SideNotesBook {
