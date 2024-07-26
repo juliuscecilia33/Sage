@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { logout } from "@/app/logout/actions";
-import ThemesModal from "../../Themes/Modal";
+import ThemesModal from "../../Themes/CreateModal";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
 
