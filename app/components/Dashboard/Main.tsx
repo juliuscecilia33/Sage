@@ -19,6 +19,7 @@ import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { getSideNotesBook } from "@/utils/data/sideNotes/book/fetchSideNotesBook";
 import LeftSection from "./Left/Main";
 import RightSection from "./Right/Main";
+import { getThemes } from "@/utils/data/themes/fetchThemes";
 
 // Interfaces
 interface ChapterData {
@@ -62,6 +63,10 @@ export default function Main({ user }: any) {
     async function fetchSideNotes() {
       try {
         const data = await getSideNotesBook();
+        const themesData = await getThemes();
+
+        console.log("theme data", themesData);
+
         setSideNotesBook(data);
       } catch (error) {
         setError("Failed to retrieve side notes");
