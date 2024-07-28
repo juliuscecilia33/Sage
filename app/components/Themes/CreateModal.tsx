@@ -4,6 +4,7 @@ import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
+import { postTheme } from "@/utils/data/themes/postTheme";
 
 interface ModalProps {
   onClose: () => void;
@@ -38,33 +39,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
 
     // TODO: add input validator to check if values are not null
 
-    try {
-      // TODO: Add loading indicator on button
-
-      const response = await fetch("/api/theme/user/postTheme", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(themeData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-
-        if (data) {
-          console.log("theme data inside the if condition", data);
-        }
-
-        onClose();
-        // Redirect or show a success message
-      } else {
-        // Handle error
-        console.error("Failed to create side note");
-      }
-    } catch (error) {
-      console.error("Failed to update side note:", error);
-    }
+    postTheme({ themeData, onClose });
   };
 
   const buttonColors = [
