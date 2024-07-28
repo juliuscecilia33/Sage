@@ -47,6 +47,7 @@ export default function Main({ user }: any) {
 
   const [showModal, setShowModal] = useState(false);
   const [sideNotesBook, setSideNotesBook] = useState<any[]>([]);
+  const [userThemes, setUserThemes] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const openModal = () => setShowModal(true);
@@ -60,21 +61,20 @@ export default function Main({ user }: any) {
     };
     const key = generateKey(params.version, params.book, params.chapter);
 
-    async function fetchSideNotes() {
+    async function fetchSideNotesAndThemes() {
       try {
-        const data = await getSideNotesBook();
+        const sideNotesData = await getSideNotesBook();
         const themesData = await getThemes();
 
-        console.log("theme data", themesData);
-
-        setSideNotesBook(data);
+        setSideNotesBook(sideNotesData);
+        setUserThemes(themesData);
       } catch (error) {
         setError("Failed to retrieve side notes");
         console.log("Failed to retrieve side notes");
       }
     }
 
-    fetchSideNotes();
+    fetchSideNotesAndThemes();
 
     // TODO: You can add to Recently Read dropdown
 
