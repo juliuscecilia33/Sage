@@ -69,8 +69,9 @@ const RightSection = ({
           prevNoteId={""}
         />
         <p className="text-[#B5B5B5] text-left font-light my-4">Your Notes:</p>
-        {sideNotesBook.map((note: any) => (
+        {sideNotesBook.map((note: any, key: any) => (
           <Note
+            key={key}
             noteData={note}
             previousNotes={sideNotesBook}
             setNotes={setSideNotesBook}

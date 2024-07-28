@@ -5,8 +5,22 @@ import { logout } from "@/app/logout/actions";
 import ThemesModal from "../../Themes/CreateModal";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
+import { extractAndAppendText } from "@/utils/extractHexColor";
 
-const LeftSection = () => {
+interface ThemeData {
+  userId: string;
+  name: string;
+  description: string;
+  themeColor: string;
+  notesCount: number;
+  workspaceId: string;
+}
+
+interface LeftSectionProps {
+  userThemes: ThemeData[];
+}
+
+const LeftSection = ({ userThemes }: LeftSectionProps) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -17,6 +31,8 @@ const LeftSection = () => {
   const handleSearch = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
   };
+
+  console.log("theme data from main: ", userThemes);
 
   return (
     <div className="w-[18%] h-full py-4">
@@ -35,7 +51,6 @@ const LeftSection = () => {
           <button type="submit">Search</button>
         </form>
       </div>
-
       <div className="flex flex-col w-full px-3">
         <div className="w-full flex justify-between">
           <p className="text-[#B5B5B5] text-base text-left font-light my-4">
@@ -46,38 +61,31 @@ const LeftSection = () => {
           </button>
           <ThemesModal show={showModal} onClose={closeModal} />
         </div>
-        <div className="mt-3 mb-1 w-full flex justify-between bg-[#FBFCFD] p-3">
-          <div className="w-[83%] flex justify-start items-center text-sm">
-            <div className="w-6 h-6 rounded bg-[#B7C467] mr-3"></div>
-            <h3 className="truncate text-[#B7C467] text-medium">
-              Life and Growth
-            </h3>
+        {userThemes.map((theme: any, key: any) => (
+          <div
+            key={key}
+            className={`mt-3 mb-1 w-full flex justify-between bg-[#FBFCFD] p-3`}
+          >
+            <div className="w-[83%] flex justify-start items-center text-sm">
+              <div className={`w-6 h-6 rounded ${theme.themeColor} mr-3`}></div>
+              <h3
+                className={`truncate text-medium ${extractAndAppendText(
+                  theme.themeColor
+                )}`}
+              >
+                {theme.name}
+              </h3>
+            </div>
+            <div className="w-[17%] flex justify-between items-center">
+              <button>
+                <FaRegEdit className="text-[#B5B5B5]" size={15} />
+              </button>
+              <button>
+                <FaRegTrashCan className="text-[#B5B5B5]" size={15} />
+              </button>
+            </div>
           </div>
-          <div className="w-[17%] flex justify-between items-center">
-            <button>
-              <FaRegEdit className="text-[#B5B5B5]" size={15} />
-            </button>
-            <button>
-              <FaRegTrashCan className="text-[#B5B5B5]" size={15} />
-            </button>
-          </div>
-        </div>
-        <div className="w-full flex justify-between p-3">
-          <div className="w-[83%] flex justify-start items-center text-sm">
-            <div className="w-6 h-6 rounded bg-[#B7C467] mr-3"></div>
-            <h3 className="truncate text-[#B7C467] text-medium">
-              Life and Growth
-            </h3>
-          </div>
-          <div className="w-[17%] flex justify-between items-center">
-            <button>
-              <FaRegEdit className="text-[#B5B5B5]" size={15} />
-            </button>
-            <button>
-              <FaRegTrashCan className="text-[#B5B5B5]" size={15} />
-            </button>
-          </div>
-        </div>
+        ))}
         <form action={() => logout()} method="post">
           <button
             className={`mt-10 ${paragraphFont.className} w-full transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#FEF2EE] flex justify-between items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FEF2EE] text-[#956E60]`}

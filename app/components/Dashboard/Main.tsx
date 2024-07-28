@@ -66,6 +66,8 @@ export default function Main({ user }: any) {
         const sideNotesData = await getSideNotesBook();
         const themesData = await getThemes();
 
+        console.log("themes data: ", themesData);
+
         setSideNotesBook(sideNotesData);
         setUserThemes(themesData);
       } catch (error) {
@@ -105,7 +107,7 @@ export default function Main({ user }: any) {
 
   return (
     <div className="flex w-full h-full">
-      <LeftSection />
+      <LeftSection userThemes={userThemes} />
       <div className={`w-[64%] ${colors.primary.default}`}>
         <Navbar />
         <Hero />
