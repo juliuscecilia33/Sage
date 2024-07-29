@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 import { paragraphFont, titleFont } from "@/utils/fonts";
 import { logout } from "@/app/logout/actions";
@@ -16,11 +16,14 @@ interface ThemeData {
   workspaceId: string;
 }
 
+type SetUserThemes = Dispatch<SetStateAction<ThemeData[]>>;
+
 interface LeftSectionProps {
   userThemes: ThemeData[];
+  setUserThemes: SetUserThemes;
 }
 
-const LeftSection = ({ userThemes }: LeftSectionProps) => {
+const LeftSection = ({ userThemes, setUserThemes }: LeftSectionProps) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showModal, setShowModal] = useState(false);
@@ -59,7 +62,12 @@ const LeftSection = ({ userThemes }: LeftSectionProps) => {
           <button onClick={openModal} className="text-[#956E60] text-base">
             Add
           </button>
-          <ThemesModal show={showModal} onClose={closeModal} />
+          <ThemesModal
+            previousThemes={userThemes}
+            show={showModal}
+            onClose={closeModal}
+            setThemes={setUserThemes}
+          />
         </div>
         {userThemes.map((theme: any, key: any) => (
           <div

@@ -1,17 +1,35 @@
 import { paragraphFont } from "@/utils/fonts";
-import React, { useRef, useState } from "react";
+import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postTheme } from "@/utils/data/themes/postTheme";
 
+interface ThemeData {
+  userId: string;
+  name: string;
+  description: string;
+  themeColor: string;
+  notesCount: number;
+  workspaceId: string;
+}
+
+type SetUserThemes = Dispatch<SetStateAction<ThemeData[]>>;
+
 interface ModalProps {
   onClose: () => void;
   show: boolean;
+  previousThemes: any;
+  setThemes: any;
 }
 
-const ThemesModal = ({ onClose, show }: ModalProps) => {
+const ThemesModal = ({
+  onClose,
+  show,
+  previousThemes,
+  setThemes,
+}: ModalProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // Context
@@ -39,7 +57,7 @@ const ThemesModal = ({ onClose, show }: ModalProps) => {
 
     // TODO: add input validator to check if values are not null
 
-    postTheme({ themeData, onClose });
+    postTheme({ themeData, onClose, previousThemes, setThemes });
   };
 
   const buttonColors = [

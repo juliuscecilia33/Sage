@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 interface ThemeData {
   userId: string;
   name: string;
@@ -7,12 +9,21 @@ interface ThemeData {
   workspaceId: string;
 }
 
+type SetUserThemes = Dispatch<SetStateAction<ThemeData[]>>;
+
 interface PostThemeProps {
   onClose: () => void;
   themeData: ThemeData;
+  previousThemes: ThemeData[];
+  setThemes: SetUserThemes;
 }
 
-export async function postTheme({ themeData, onClose }: PostThemeProps) {
+export async function postTheme({
+  themeData,
+  onClose,
+  previousThemes,
+  setThemes,
+}: PostThemeProps) {
   try {
     // TODO: Add loading indicator on button
 
@@ -29,6 +40,7 @@ export async function postTheme({ themeData, onClose }: PostThemeProps) {
 
       if (data) {
         console.log("theme data inside the if condition", data);
+        setThemes((prevThemes) => [...prevThemes, data.newTheme]);
       }
 
       onClose();

@@ -107,7 +107,7 @@ export default function Main({ user }: any) {
 
   return (
     <div className="flex w-full h-full">
-      <LeftSection userThemes={userThemes} />
+      <LeftSection userThemes={userThemes} setUserThemes={setUserThemes} />
       <div className={`w-[64%] ${colors.primary.default}`}>
         <Navbar />
         <Hero />
