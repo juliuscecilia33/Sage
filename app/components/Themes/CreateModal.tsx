@@ -5,6 +5,7 @@ import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postTheme } from "@/utils/data/themes/postTheme";
+import { extractHexColor } from "@/utils/extractHexColor";
 
 interface ThemeData {
   userId: string;
@@ -21,7 +22,7 @@ interface ModalProps {
   onClose: () => void;
   show: boolean;
   previousThemes: any;
-  setThemes: any;
+  setThemes: SetUserThemes;
 }
 
 const ThemesModal = ({
@@ -108,6 +109,7 @@ const ThemesModal = ({
   };
 
   if (!show) return null;
+
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
       <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-12">
@@ -131,16 +133,23 @@ const ThemesModal = ({
             ref={scrollRef}
             style={{ scrollSnapType: "x mandatory" }}
           >
-            {sampleThemes.map((theme, key) => (
+            {previousThemes.map((theme: ThemeData, key: any) => (
               <div
                 key={key}
                 style={{ scrollSnapAlign: "start" }}
                 className="flex flex-shrink-0 flex-col items-center w-[20%]"
               >
-                <div className="flex flex-col bg-[#B7C467] p-4 rounded w-full">
+                <div
+                  className={`${theme.themeColor} flex flex-col p-4 rounded w-full`}
+                >
                   <div className="w-full flex justify-end mb-20">
-                    <div className="w-10 h-10 aspect-square rounded-full flex justify-center items-center bg-white text-[#B7C467] font-bold text-sm">
-                      {theme.count}
+                    <div
+                      style={{
+                        color: extractHexColor(theme.themeColor) || "black",
+                      }}
+                      className="w-10 h-10 aspect-square rounded-full flex justify-center items-center bg-white font-bold text-sm"
+                    >
+                      {theme.notesCount}
                     </div>
                   </div>
                   <h3 className="text-base font-bold text-white truncate">
