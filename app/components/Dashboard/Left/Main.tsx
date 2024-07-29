@@ -5,7 +5,7 @@ import { logout } from "@/app/logout/actions";
 import ThemesModal from "../../Themes/CreateModal";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
-import { extractAndAppendText } from "@/utils/extractHexColor";
+import { extractAndAppendText, extractHexColor } from "@/utils/extractHexColor";
 
 interface ThemeData {
   userId: string;
@@ -64,14 +64,13 @@ const LeftSection = ({ userThemes }: LeftSectionProps) => {
         {userThemes.map((theme: any, key: any) => (
           <div
             key={key}
-            className={`mt-3 mb-1 w-full flex justify-between bg-[#FBFCFD] p-3`}
+            className={`mt-3 mb-1 w-full flex justify-between p-3`}
           >
             <div className="w-[83%] flex justify-start items-center text-sm">
               <div className={`w-6 h-6 rounded ${theme.themeColor} mr-3`}></div>
               <h3
-                className={`truncate text-medium ${extractAndAppendText(
-                  theme.themeColor
-                )}`}
+                className={`truncate text-medium`}
+                style={{ color: extractHexColor(theme.themeColor) || "black" }}
               >
                 {theme.name}
               </h3>
