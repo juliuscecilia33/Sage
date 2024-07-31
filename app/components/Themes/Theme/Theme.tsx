@@ -14,11 +14,16 @@ interface ThemeData {
 interface ThemeProps {
   key: string;
   theme: ThemeData;
+  openThemeModal: any;
 }
 
-const Theme = ({ key, theme }: ThemeProps) => {
+const Theme = ({ key, theme, openThemeModal }: ThemeProps) => {
   return (
-    <div key={key} className={`mt-3 mb-1 w-full flex justify-between p-3`}>
+    <button
+      onClick={openThemeModal}
+      key={key}
+      className={`hover:bg-[#F6F6F6] transition duration-300 ease-in-out mt-3 mb-1 w-full flex items-center justify-between p-3`}
+    >
       <div className="w-[83%] flex justify-start items-center text-sm">
         <div className={`w-6 h-6 rounded ${theme.themeColor} mr-3`}></div>
         <h3
@@ -36,7 +41,7 @@ const Theme = ({ key, theme }: ThemeProps) => {
           <FaRegTrashCan className="text-[#B5B5B5]" size={15} />
         </button>
       </div>
-    </div>
+    </button>
   );
 };
 

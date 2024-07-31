@@ -1,12 +1,10 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { paragraphFont } from "@/utils/fonts";
 import { logout } from "@/app/logout/actions";
 import ThemesModal from "../../Themes/CreateModal";
-import { FaRegTrashCan } from "react-icons/fa6";
-import { FaRegEdit } from "react-icons/fa";
-import { extractAndAppendText, extractHexColor } from "@/utils/extractHexColor";
 import Theme from "../../Themes/Theme/Theme";
+import ThemeModal from "../../Themes/Theme/Modal";
 
 interface ThemeData {
   userId: string;
@@ -27,10 +25,14 @@ interface LeftSectionProps {
 const LeftSection = ({ userThemes, setUserThemes }: LeftSectionProps) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showThemesModal, setShowThemesModal] = useState(false);
+  const [showThemeModal, setShowThemeModal] = useState(false);
 
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openThemesModal = () => setShowThemesModal(true);
+  const closeThemesModal = () => setShowThemesModal(false);
+
+  const openThemeModal = () => setShowThemeModal(true);
+  const closeThemeModal = () => setShowThemeModal(false);
 
   const handleSearch = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -60,19 +62,23 @@ const LeftSection = ({ userThemes, setUserThemes }: LeftSectionProps) => {
           <p className="text-[#B5B5B5] text-base text-left font-light my-4">
             Themes Key
           </p>
-          <button onClick={openModal} className="text-[#956E60] text-base">
+          <button
+            onClick={openThemesModal}
+            className="text-[#956E60] text-base"
+          >
             Add
           </button>
           <ThemesModal
             previousThemes={userThemes}
-            show={showModal}
-            onClose={closeModal}
+            show={showThemesModal}
+            onClose={closeThemesModal}
             setThemes={setUserThemes}
           />
         </div>
         {userThemes.map((theme: ThemeData, key: any) => (
-          <Theme key={key} theme={theme} />
+          <Theme key={key} theme={theme} openThemeModal={openThemeModal} />
         ))}
+        <ThemeModal onClose={closeThemeModal} show={showThemeModal} />
         <form action={() => logout()} method="post">
           <button
             className={`mt-10 ${paragraphFont.className} w-full transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] border border-[#FEF2EE] flex justify-between items-center px-4 py-1.5 text-sm font-medium rounded bg-[#FEF2EE] text-[#956E60]`}
