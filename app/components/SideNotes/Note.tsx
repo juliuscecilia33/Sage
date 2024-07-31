@@ -41,6 +41,8 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
 
   // change formatted date to updated date
 
+
+
   return (
     <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
       <div className="flex items-center justify-between">

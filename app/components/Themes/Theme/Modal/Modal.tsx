@@ -4,10 +4,7 @@ import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
-
-import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { postTheme } from "@/utils/data/themes/postTheme";
-import { extractHexColor } from "@/utils/extractHexColor";
+import { sampleNotes } from "@/utils/data/sideNotes/sampleNotes";
 
 interface ThemeData {
   userId: string;
@@ -99,9 +96,10 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
           <div className="flex flex-col w-3/4">
             <div className="w-full mb-3 p-4 bg-white flex flex-col justify-center">
               <h3 className="text-black text-lg">Notes</h3>
+              <div className="flex"></div>
             </div>
             <div className="w-full p-4 bg-white flex flex-col justify-center">
-              <h3 className="text-black text-lg">Notes</h3>
+              <h3 className="text-black text-lg">Books</h3>
             </div>
           </div>
         </div>
