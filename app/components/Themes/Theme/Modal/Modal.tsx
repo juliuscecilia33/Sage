@@ -5,6 +5,7 @@ import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import { sampleNotes } from "@/utils/data/sideNotes/sampleNotes";
+import Note from "./Note";
 
 interface ThemeData {
   userId: string;
@@ -13,6 +14,19 @@ interface ThemeData {
   themeColor: string;
   notesCount: number;
   workspaceId: string;
+}
+
+interface NoteData {
+  id: string;
+  title: string;
+  description: string;
+  book: string;
+  verse: string;
+  userTheme: string;
+  isPrivate: boolean;
+  workspaceId: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 type SetUserThemes = Dispatch<SetStateAction<ThemeData[]>>;
@@ -95,8 +109,12 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
           </div>
           <div className="flex flex-col w-3/4">
             <div className="w-full mb-3 p-4 bg-white flex flex-col justify-center">
-              <h3 className="text-black text-lg">Notes</h3>
-              <div className="flex"></div>
+              <h3 className="text-black text-lg mb-5">Notes</h3>
+              <div className="flex items-center w-full">
+                {sampleNotes.map((note: any, key: any) => (
+                  <Note noteData={note} />
+                ))}
+              </div>
             </div>
             <div className="w-full p-4 bg-white flex flex-col justify-center">
               <h3 className="text-black text-lg">Books</h3>

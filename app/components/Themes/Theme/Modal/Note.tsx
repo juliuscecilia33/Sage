@@ -24,13 +24,13 @@ const Note = ({ noteData }: any) => {
   const formattedDate = formatTimestamp(noteData.createdAt);
 
   return (
-    <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
-          <p>{noteData.title}</p>
+    <div className="rounded text-black p-4 w-1/4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mr-3">
+      <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center truncate">
+          <div className="w-5 h-5 bg-blue-500 rounded-full mr-3 fixed"></div>
+          <p className="truncate">{noteData.title}asdfasdf</p>
         </div>
-        <p className="text-[#B5B5B5] text-left font-light my-4">1:2</p>
+        <p className="text-[#B5B5B5] text-left font-light my-4 ml-4">1:2</p>
       </div>
       <p>{noteData.description}</p>
       <div className="flex justify-between items-center">
