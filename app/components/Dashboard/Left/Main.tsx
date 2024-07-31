@@ -6,6 +6,7 @@ import ThemesModal from "../../Themes/CreateModal";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
 import { extractAndAppendText, extractHexColor } from "@/utils/extractHexColor";
+import Theme from "../../Themes/Theme/Theme";
 
 interface ThemeData {
   userId: string;
@@ -69,29 +70,8 @@ const LeftSection = ({ userThemes, setUserThemes }: LeftSectionProps) => {
             setThemes={setUserThemes}
           />
         </div>
-        {userThemes.map((theme: any, key: any) => (
-          <div
-            key={key}
-            className={`mt-3 mb-1 w-full flex justify-between p-3`}
-          >
-            <div className="w-[83%] flex justify-start items-center text-sm">
-              <div className={`w-6 h-6 rounded ${theme.themeColor} mr-3`}></div>
-              <h3
-                className={`truncate text-medium`}
-                style={{ color: extractHexColor(theme.themeColor) || "black" }}
-              >
-                {theme.name}
-              </h3>
-            </div>
-            <div className="w-[17%] flex justify-between items-center">
-              <button>
-                <FaRegEdit className="text-[#B5B5B5]" size={15} />
-              </button>
-              <button>
-                <FaRegTrashCan className="text-[#B5B5B5]" size={15} />
-              </button>
-            </div>
-          </div>
+        {userThemes.map((theme: ThemeData, key: any) => (
+          <Theme key={key} theme={theme} />
         ))}
         <form action={() => logout()} method="post">
           <button
