@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { FaEye } from "react-icons/fa";
+
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postTheme } from "@/utils/data/themes/postTheme";
 import { extractHexColor } from "@/utils/extractHexColor";
@@ -42,10 +44,12 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
-      <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-12">
-        <div className="flex justify-between items-center">
+      <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-4/5 p-12">
+        <div className="flex justify-between items-center mb-5">
           <div className={`flex items-center`}>
-            <h3 className="text-2xl font-bold text-[#11181C]">Your Theme</h3>
+            <h3 className="text-2xl font-bold text-[#C467AA]">
+              God, Jesus, Holy Spirit
+            </h3>
           </div>
           <button
             onClick={onClose}
@@ -53,6 +57,45 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
           >
             <MdClose size={30} />
           </button>
+        </div>
+        <div className="flex w-full">
+          <div className="flex flex-col w-1/4">
+            <div className="flex flex-col w-full justify-center p-5 bg-white rounded-lg border-2 border-[#C467AA] mb-5">
+              <p className="text-base text-[#B5B5B5] mb-3 text-left">
+                Description
+              </p>
+              <p className="text-base text-[#B5B5B5] mb-3 text-black text-left">
+                And God said, Let there be a firmament in the midst of the
+                waters, and let it divide the waters from the waters.
+              </p>
+              <p className="text-base text-[#B5B5B5] mb-3 text-left">
+                Created At
+              </p>
+              <p className="text-base text-[#B5B5B5] mb-3 text-black text-left">
+                07/31/2024
+              </p>
+            </div>
+            <div className="w-full flex justify-between">
+              <button
+                onClick={() => {}}
+                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+              >
+                <FaRegEdit className="text-[#B5B5B5]" size={25} />
+              </button>
+              <button
+                onClick={() => {}}
+                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+              >
+                <FaRegTrashCan className="text-[#B5B5B5]" size={25} />
+              </button>
+              <button
+                onClick={() => {}}
+                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+              >
+                <FaEye className="text-[#B5B5B5]" size={25} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
