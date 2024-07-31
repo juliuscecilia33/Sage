@@ -59,7 +59,7 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
           </button>
         </div>
         <div className="flex w-full">
-          <div className="flex flex-col w-1/4">
+          <div className="flex flex-col w-1/4 mr-10">
             <div className="flex flex-col w-full justify-center p-5 bg-white rounded-lg border-2 border-[#C467AA] mb-5">
               <p className="text-base text-[#B5B5B5] mb-3 text-left">
                 Description
@@ -94,6 +94,14 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
               >
                 <FaEye className="text-[#B5B5B5]" size={25} />
               </button>
+            </div>
+          </div>
+          <div className="flex flex-col w-3/4">
+            <div className="w-full mb-3 p-4 bg-white flex flex-col justify-center">
+              <h3 className="text-black text-lg">Notes</h3>
+            </div>
+            <div className="w-full p-4 bg-white flex flex-col justify-center">
+              <h3 className="text-black text-lg">Notes</h3>
             </div>
           </div>
         </div>

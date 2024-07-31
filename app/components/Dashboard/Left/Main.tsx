@@ -4,7 +4,7 @@ import { paragraphFont } from "@/utils/fonts";
 import { logout } from "@/app/logout/actions";
 import ThemesModal from "../../Themes/CreateModal";
 import Theme from "../../Themes/Theme/Theme";
-import ThemeModal from "../../Themes/Theme/Modal";
+import ThemeModal from "../../Themes/Theme/Modal/Modal";
 
 interface ThemeData {
   userId: string;
