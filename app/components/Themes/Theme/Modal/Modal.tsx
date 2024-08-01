@@ -130,6 +130,23 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
             </div>
             <div className="w-full p-4 bg-white flex flex-col justify-center">
               <h3 className="text-black text-lg">Books</h3>
+              <div className="w-full flex px-3 py-3">
+                <button onClick={scrollLeft} className="text-[#B5B5B5] mr-5">
+                  <FaChevronLeft size={20} />
+                </button>
+                <div
+                  ref={scrollRef}
+                  style={{ scrollSnapType: "x mandatory" }}
+                  className="scrollbar-hide flex overflow-x-auto scrollbar-hide space-x-4 items-center w-full"
+                >
+                  {sampleNotes.map((note: any, key: any) => (
+                    <Note noteData={note} />
+                  ))}
+                </div>
+                <button onClick={scrollRight} className="ml-5 text-[#B5B5B5]">
+                  <FaChevronRight size={20} />
+                </button>
+              </div>
             </div>
           </div>
         </div>
