@@ -6,6 +6,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
 import { sampleNotes } from "@/utils/data/sideNotes/sampleNotes";
 import Note from "./Note";
+import { books } from "@/utils/data/books/sampleBooks";
 
 interface ThemeData {
   userId: string;
@@ -37,17 +38,30 @@ interface ModalProps {
 }
 
 const ThemeModal = ({ onClose, show }: ModalProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollNotesRef = useRef<HTMLDivElement>(null);
+  const scrollBooksRef = useRef<HTMLDivElement>(null);
 
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
+  const scrollNotesRight = () => {
+    if (scrollNotesRef.current) {
+      scrollNotesRef.current.scrollBy({ left: 300, behavior: "smooth" });
     }
   };
 
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: "smooth" });
+  const scrollNotesLeft = () => {
+    if (scrollNotesRef.current) {
+      scrollNotesRef.current.scrollBy({ left: -300, behavior: "smooth" });
+    }
+  };
+
+  const scrollBooksRight = () => {
+    if (scrollBooksRef.current) {
+      scrollBooksRef.current.scrollBy({ left: 300, behavior: "smooth" });
+    }
+  };
+
+  const scrollBooksLeft = () => {
+    if (scrollBooksRef.current) {
+      scrollBooksRef.current.scrollBy({ left: -300, behavior: "smooth" });
     }
   };
 
@@ -111,11 +125,14 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
             <div className="w-full mb-3 p-6 bg-white flex flex-col justify-center">
               <h3 className="text-black text-lg mb-2">Notes</h3>
               <div className="w-full flex px-3 py-3">
-                <button onClick={scrollLeft} className="text-[#B5B5B5] mr-5">
+                <button
+                  onClick={scrollNotesLeft}
+                  className="text-[#B5B5B5] mr-5"
+                >
                   <FaChevronLeft size={20} />
                 </button>
                 <div
-                  ref={scrollRef}
+                  ref={scrollNotesRef}
                   style={{ scrollSnapType: "x mandatory" }}
                   className="scrollbar-hide flex overflow-x-auto scrollbar-hide space-x-4 items-center w-full"
                 >
@@ -123,7 +140,10 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
                     <Note noteData={note} />
                   ))}
                 </div>
-                <button onClick={scrollRight} className="ml-5 text-[#B5B5B5]">
+                <button
+                  onClick={scrollNotesRight}
+                  className="ml-5 text-[#B5B5B5]"
+                >
                   <FaChevronRight size={20} />
                 </button>
               </div>
@@ -131,19 +151,30 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
             <div className="w-full p-4 bg-white flex flex-col justify-center">
               <h3 className="text-black text-lg">Books</h3>
               <div className="w-full flex px-3 py-3">
-                <button onClick={scrollLeft} className="text-[#B5B5B5] mr-5">
+                <button
+                  onClick={scrollBooksLeft}
+                  className="text-[#B5B5B5] mr-5"
+                >
                   <FaChevronLeft size={20} />
                 </button>
                 <div
-                  ref={scrollRef}
+                  ref={scrollBooksRef}
                   style={{ scrollSnapType: "x mandatory" }}
                   className="scrollbar-hide flex overflow-x-auto scrollbar-hide space-x-4 items-center w-full"
                 >
-                  {sampleNotes.map((note: any, key: any) => (
-                    <Note noteData={note} />
+                  {books.slice(0, 10).map((book: any, key: any) => (
+                    <div
+                      key={key}
+                      className="rounded-r-lg h-[250px] min-w-[150px] rounded-l-sm bg-[#B7C467] flex justify-center items-center p-4"
+                    >
+                      <p className="truncate">{book.name}</p>
+                    </div>
                   ))}
                 </div>
-                <button onClick={scrollRight} className="ml-5 text-[#B5B5B5]">
+                <button
+                  onClick={scrollBooksRight}
+                  className="ml-5 text-[#B5B5B5]"
+                >
                   <FaChevronRight size={20} />
                 </button>
               </div>
