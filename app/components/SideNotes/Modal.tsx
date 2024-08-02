@@ -55,6 +55,12 @@ const Modal = ({
   const [isPrivate, setIsPrivate] = useState<boolean>(true);
   const [workspaceId, setwWorkspaceId] = useState<any>(null);
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
   const { userId } = useCurrentBookDataContext();
 
   console.log("modal userid", userId);
@@ -143,15 +149,61 @@ const Modal = ({
             <p className="text-[#B5B5B5] font-light mb-2">
               Add to your Themes:
             </p>
-            <div className="flex rounded bg-white px-2 py-3 mr-4 items-center">
+            <div className="relative flex rounded bg-white px-2 py-3 mr-4 items-center">
               <button
                 type="button"
+                id="dropdownDefaultButton"
+                onClick={toggleDropdown}
                 className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-3 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
               >
                 <div className="w-7 h-7 bg-blue-500 rounded mr-4"></div>
                 Life And Growth
                 <FaChevronDown className="ml-2" />
               </button>
+              {isOpen && (
+                <div
+                  id="dropdown"
+                  className="z-10 absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                >
+                  <ul
+                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Dashboard
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Settings
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Earnings
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      >
+                        Sign out
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           <div className="flex flex-col">
