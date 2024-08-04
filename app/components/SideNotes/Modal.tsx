@@ -1,7 +1,7 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
 import { paragraphFont } from "@/utils/fonts";
-import { FaChevronDown } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postSideNotesBook } from "@/utils/data/sideNotes/book/postSideNotesBook";
 import { editSideNotesBook } from "@/utils/data/sideNotes/book/editSideNotesBook";
@@ -158,46 +158,38 @@ const Modal = ({
               >
                 <div className="w-7 h-7 bg-blue-500 rounded mr-4"></div>
                 Life And Growth
-                <FaChevronDown className="ml-2" />
+                {isOpen ? (
+                  <FaChevronUp className="ml-2" />
+                ) : (
+                  <FaChevronDown className="ml-2" />
+                )}
               </button>
               {isOpen && (
                 <div
                   id="dropdown"
-                  className="z-10 absolute right-0 mt-2 w-44 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700"
+                  className={`z-10 absolute bottom-full mb-2 right-0 w-44 bg-white divide-y divide-gray-200 rounded-lg shadow-md transition-opacity duration-300 ease-in-out ${
+                    isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+                  }`}
+                  aria-labelledby="dropdownDefaultButton"
                 >
-                  <ul
-                    className="py-2 text-sm text-gray-700 dark:text-gray-200"
-                    aria-labelledby="dropdownDefaultButton"
-                  >
+                  <ul className="py-2 text-sm text-gray-700">
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                         Dashboard
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                         Settings
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                         Earnings
                       </a>
                     </li>
                     <li>
-                      <a
-                        href="#"
-                        className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                      >
+                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
                         Sign out
                       </a>
                     </li>
