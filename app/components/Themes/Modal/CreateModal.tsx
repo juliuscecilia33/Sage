@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { postTheme } from "@/utils/data/themes/postTheme";
+import { postTheme } from "@/lib/utils/data/themes/postTheme";
 import ThemeInModal from "./ThemeInModal";
 
 interface ThemeData {

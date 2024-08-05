@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { formatTimestamp } from "@/utils/dateUtils";
+import { formatTimestamp } from "@/lib/utils/dateUtils";
 import Modal from "./Modal";
 
 interface SideNote {

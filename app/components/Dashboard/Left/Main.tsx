@@ -1,11 +1,12 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 
-import { paragraphFont } from "@/utils/fonts";
+import { paragraphFont } from "@/lib/utils/fonts";
 import { logout } from "@/app/logout/actions";
 import ThemesModal from "../../Themes/Modal/CreateModal";
 import Theme from "../../Themes/Theme/Theme";
 import ThemeModal from "../../Themes/Theme/Modal/Modal";
 
+// TODO: Export to a type
 interface ThemeData {
   userId: string;
   name: string;

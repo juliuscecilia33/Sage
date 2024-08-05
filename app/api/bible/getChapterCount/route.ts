@@ -3,7 +3,7 @@
 import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-import { getBookId } from "@/utils/getBookId";
+import { getBookId } from "@/lib/utils/getBookId";
 
 import axios from "axios";
 

@@ -1,7 +1,7 @@
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import { paragraphFont } from "@/utils/fonts";
+import { paragraphFont } from "@/lib/utils/fonts";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { getBookNamesArray } from "@/utils/getBookId";
+import { getBookNamesArray } from "@/lib/utils/getBookId";
 import BooksDropdown from "../Buttons/BooksDropdown";
 
 const Navbar = () => {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Main from "../components/Dashboard/Main";
-import { getUser } from "@/utils/supabase/server"; // Updated import for user fetching
+import { getUser } from "@/lib/utils/supabase/server"; // Updated import for user fetching
 import { useCurrentBookDataContext } from "../context/CurrentBookData";
 
 export default function Dashboard() {

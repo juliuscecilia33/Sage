@@ -1,12 +1,12 @@
-import { paragraphFont } from "@/utils/fonts";
+import { paragraphFont } from "@/lib/utils/fonts";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
-import { sampleNotes } from "@/utils/data/sideNotes/sampleNotes";
+import { sampleNotes } from "@/lib/utils/data/sideNotes/sampleNotes";
 import Note from "./Note";
-import { books } from "@/utils/data/books/sampleBooks";
+import { books } from "@/lib/utils/data/books/sampleBooks";
 
 interface ThemeData {
   userId: string;

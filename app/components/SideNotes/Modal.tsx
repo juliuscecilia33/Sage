@@ -1,10 +1,10 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
-import { paragraphFont } from "@/utils/fonts";
+import { paragraphFont } from "@/lib/utils/fonts";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { postSideNotesBook } from "@/utils/data/sideNotes/book/postSideNotesBook";
-import { editSideNotesBook } from "@/utils/data/sideNotes/book/editSideNotesBook";
+import { postSideNotesBook } from "@/lib/utils/data/sideNotes/book/postSideNotesBook";
+import { editSideNotesBook } from "@/lib/utils/data/sideNotes/book/editSideNotesBook";
 
 interface SideNote {
   id: string;

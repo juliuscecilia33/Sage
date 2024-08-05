@@ -8,7 +8,7 @@ import React, {
   useMemo,
 } from "react";
 
-import { getDataFromLocalStorage } from "@/utils/localStorage";
+import { getDataFromLocalStorage } from "@/lib/utils/localStorage";
 
 interface CurrentBookDataValue {
   chapterCount: number;

@@ -1,10 +1,10 @@
 // components/Navbar.tsx
 import { useState, useRef, FocusEvent } from "react";
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { paragraphFont, titleFont } from "@/lib/utils/fonts";
 import { FaChevronDown } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { fetchChapterData } from "@/utils/data/fetchChapterData";
-import { generateKey } from "@/utils/generate/generateKey";
+import { fetchChapterData } from "@/lib/utils/data/fetchChapterData";
+import { generateKey } from "@/lib/utils/generate/generateKey";
 
 type DropdownProps = {
   title: string;

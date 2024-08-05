@@ -7,19 +7,19 @@ import Navbar from "./Navbar";
 import Hero from "./Hero";
 
 // Utilities
-import { colors } from "../../../utils/colors";
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { colors } from "../../../lib/utils/colors";
+import { paragraphFont, titleFont } from "@/lib/utils/fonts";
 
-import { fetchChapterData } from "@/utils/data/fetchChapterData";
+import { fetchChapterData } from "@/lib/utils/data/fetchChapterData";
 
-import { generateKey } from "@/utils/generate/generateKey";
+import { generateKey } from "@/lib/utils/generate/generateKey";
 
 // Context
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { getSideNotesBook } from "@/utils/data/sideNotes/book/fetchSideNotesBook";
+import { getSideNotesBook } from "@/lib/utils/data/sideNotes/book/fetchSideNotesBook";
 import LeftSection from "./Left/Main";
 import RightSection from "./Right/Main";
-import { getThemes } from "@/utils/data/themes/fetchThemes";
+import { getThemes } from "@/lib/utils/data/themes/fetchThemes";
 
 // Interfaces
 interface ChapterData {

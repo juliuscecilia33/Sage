@@ -1,4 +1,4 @@
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { paragraphFont, titleFont } from "@/lib/utils/fonts";
 import { Dispatch, SetStateAction } from "react";
 
 import { IoIosCreate } from "react-icons/io";

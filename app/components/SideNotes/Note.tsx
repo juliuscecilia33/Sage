@@ -2,11 +2,11 @@ import React, { useState } from "react";
 
 import { IoLocate } from "react-icons/io5";
 import { MdOutlineExpandMore } from "react-icons/md";
-import { formatTimestamp } from "@/utils/dateUtils";
+import { formatTimestamp } from "@/lib/utils/dateUtils";
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
-import { handleDelete } from "@/utils/data/sideNotes/book/deleteSideNotesBook";
+import { handleDelete } from "@/lib/utils/data/sideNotes/book/deleteSideNotesBook";
 import Modal from "./Modal";
 
 interface SideNote {

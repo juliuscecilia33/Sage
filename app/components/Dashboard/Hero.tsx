@@ -1,4 +1,4 @@
-import { colors } from "../../../utils/colors";
+import { colors } from "../../../lib/utils/colors";
 
 // Icons
 import { FaChevronDown } from "react-icons/fa";
@@ -8,10 +8,10 @@ import { FaBookBible } from "react-icons/fa6";
 import { CgNotes } from "react-icons/cg";
 import { MdStickyNote2 } from "react-icons/md";
 
-import { paragraphFont, titleFont } from "@/utils/fonts";
+import { paragraphFont, titleFont } from "@/lib/utils/fonts";
 import Dropdown from "../Buttons/Dropdown";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
-import { generateStringArray } from "@/utils/generate/generateStringArray";
+import { generateStringArray } from "@/lib/utils/generate/generateStringArray";
 
 const BibleVersions = [
   "ASV",

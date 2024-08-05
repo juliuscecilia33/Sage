@@ -1,6 +1,6 @@
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
-import { extractHexColor } from "@/utils/extractHexColor";
+import { extractHexColor } from "@/lib/utils/extractHexColor";
 
 interface ThemeData {
   userId: string;
