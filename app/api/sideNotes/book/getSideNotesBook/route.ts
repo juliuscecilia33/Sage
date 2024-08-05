@@ -10,6 +10,7 @@ export async function GET() {
     const sideNotes = await prisma.sideNotesBook.findMany({
       include: {
         user: true,
+        theme: true,
       },
     });
     return NextResponse.json(sideNotes);

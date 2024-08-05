@@ -67,6 +67,7 @@ export default function Main({ user }: any) {
         const themesData = await getThemes();
 
         console.log("themes data: ", themesData);
+        console.log("sideNotesData should be with themes: ", sideNotesData);
 
         setSideNotesBook(sideNotesData);
         setUserThemes(themesData);

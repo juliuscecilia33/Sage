@@ -53,6 +53,8 @@ const Modal = ({
   prevNoteId,
   userThemes,
 }: ModalProps) => {
+  const { userId } = useCurrentBookDataContext();
+
   if (!show) return null;
 
   const [title, setTitle] = useState(prevTitle ? prevTitle : "");
@@ -71,8 +73,6 @@ const Modal = ({
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-
-  const { userId } = useCurrentBookDataContext();
 
   console.log("user themes from modal", userThemes);
 
@@ -189,7 +189,7 @@ const Modal = ({
                     {userThemes.map((theme, key) => (
                       <li key={key}>
                         <button
-                          onClick={() => {}}
+                          onClick={() => {}} // set userTheme to theme.id
                           className="block px-4 py-2 hover:bg-gray-100"
                         >
                           {theme.name}
