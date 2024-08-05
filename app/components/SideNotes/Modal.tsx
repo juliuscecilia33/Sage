@@ -19,6 +19,15 @@ interface SideNote {
   updatedAt: Date;
 }
 
+interface ThemeData {
+  userId: string;
+  name: string;
+  description: string;
+  themeColor: string;
+  notesCount: number;
+  workspaceId: string;
+}
+
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
 interface ModalProps {
@@ -30,6 +39,7 @@ interface ModalProps {
   prevTitle: string;
   prevDescription: string;
   prevNoteId: string;
+  userThemes: ThemeData[];
 }
 
 const Modal = ({
@@ -41,6 +51,7 @@ const Modal = ({
   prevTitle,
   prevDescription,
   prevNoteId,
+  userThemes,
 }: ModalProps) => {
   if (!show) return null;
 
@@ -62,6 +73,8 @@ const Modal = ({
   };
 
   const { userId } = useCurrentBookDataContext();
+
+  console.log("user themes from modal", userThemes);
 
   console.log("modal userid", userId);
 
@@ -173,26 +186,16 @@ const Modal = ({
                   aria-labelledby="dropdownDefaultButton"
                 >
                   <ul className="py-2 text-sm text-gray-700">
-                    <li>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Dashboard
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Settings
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Earnings
-                      </a>
-                    </li>
-                    <li>
-                      <a href="#" className="block px-4 py-2 hover:bg-gray-100">
-                        Sign out
-                      </a>
-                    </li>
+                    {userThemes.map((theme, key) => (
+                      <li key={key}>
+                        <button
+                          onClick={() => {}}
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                          {theme.name}
+                        </button>
+                      </li>
+                    ))}
                   </ul>
                 </div>
               )}

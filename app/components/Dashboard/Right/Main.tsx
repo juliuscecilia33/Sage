@@ -19,6 +19,15 @@ interface SideNote {
   updatedAt: Date;
 }
 
+interface ThemeData {
+  userId: string;
+  name: string;
+  description: string;
+  themeColor: string;
+  notesCount: number;
+  workspaceId: string;
+}
+
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
 type RightSectionProps = {
@@ -27,6 +36,7 @@ type RightSectionProps = {
   closeModal: () => void;
   sideNotesBook: any;
   setSideNotesBook: SetSideNotesBook;
+  userThemes: ThemeData[];
 };
 
 const RightSection = ({
@@ -35,6 +45,7 @@ const RightSection = ({
   closeModal,
   sideNotesBook,
   setSideNotesBook,
+  userThemes,
 }: RightSectionProps) => {
   return (
     <div className={`w-[18%] h-full py-4 px-3 `}>
@@ -67,6 +78,7 @@ const RightSection = ({
           prevTitle={""}
           prevDescription={""}
           prevNoteId={""}
+          userThemes={userThemes}
         />
         <p className="text-[#B5B5B5] text-left font-light my-4">Your Notes:</p>
         {sideNotesBook.map((note: any, key: any) => (
@@ -75,6 +87,7 @@ const RightSection = ({
             noteData={note}
             previousNotes={sideNotesBook}
             setNotes={setSideNotesBook}
+            userThemes={userThemes}
           />
         ))}
       </div>

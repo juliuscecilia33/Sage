@@ -24,13 +24,23 @@ interface SideNote {
 
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
+interface ThemeData {
+  userId: string;
+  name: string;
+  description: string;
+  themeColor: string;
+  notesCount: number;
+  workspaceId: string;
+}
+
 interface ModalProps {
   noteData: SideNote;
   previousNotes: SideNote[];
-  setNotes: SetSideNotesBook; // TODO: SetSideNotesBook; Revise all types not to be "any"
+  setNotes: SetSideNotesBook;
+  userThemes: ThemeData[];
 }
 
-const Note = ({ noteData, previousNotes, setNotes }: any) => {
+const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
   const formattedDate = formatTimestamp(noteData.createdAt);
   const [showModal, setShowModal] = useState(false);
   console.log("note data: ", noteData);
@@ -79,6 +89,7 @@ const Note = ({ noteData, previousNotes, setNotes }: any) => {
         prevTitle={noteData.title}
         prevDescription={noteData.description}
         prevNoteId={noteData.id}
+        userThemes={userThemes}
       />
     </div>
   );

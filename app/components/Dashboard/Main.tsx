@@ -136,6 +136,7 @@ export default function Main({ user }: any) {
         closeModal={closeModal}
         sideNotesBook={sideNotesBook}
         setSideNotesBook={setSideNotesBook}
+        userThemes={userThemes}
       />
     </div>
   );
