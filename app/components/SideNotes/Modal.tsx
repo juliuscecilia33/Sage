@@ -20,6 +20,7 @@ interface SideNote {
 }
 
 interface ThemeData {
+  id: string;
   userId: string;
   name: string;
   description: string;
@@ -65,6 +66,9 @@ const Modal = ({
   const [chapter, setChapter] = useState<number>(0);
   const [verse, setVerse] = useState<number>(0);
   const [userTheme, setUserTheme] = useState<string>("");
+  const [selectedThemeName, setSelectedThemeName] = useState<string>(
+    userThemes[0].name
+  );
   const [isPrivate, setIsPrivate] = useState<boolean>(true);
   const [workspaceId, setwWorkspaceId] = useState<any>(null);
 
@@ -167,10 +171,10 @@ const Modal = ({
                 type="button"
                 id="dropdownDefaultButton"
                 onClick={toggleDropdown}
-                className={`${paragraphFont.className} mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-3 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
+                className={`${paragraphFont.className} truncate mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-3 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
               >
                 <div className="w-7 h-7 bg-blue-500 rounded mr-4"></div>
-                Life And Growth
+                {selectedThemeName}
                 {isOpen ? (
                   <FaChevronUp className="ml-2" />
                 ) : (
@@ -189,8 +193,12 @@ const Modal = ({
                     {userThemes.map((theme, key) => (
                       <li key={key}>
                         <button
-                          onClick={() => {}} // set userTheme to theme.id
-                          className="block px-4 py-2 hover:bg-gray-100"
+                          onClick={() => {
+                            setUserTheme(theme.id);
+                            setSelectedThemeName(theme.name);
+                            toggleDropdown();
+                          }} // set userTheme to theme.id
+                          className="text-left w-full block px-4 py-2 hover:bg-gray-100"
                         >
                           {theme.name}
                         </button>

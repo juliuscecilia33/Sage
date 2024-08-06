@@ -53,6 +53,7 @@ export default function Main({ user }: any) {
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
+  // TODO: Migrate to hooks file
   useEffect(() => {
     const params: ChapterData = {
       version: bibleVersion,
