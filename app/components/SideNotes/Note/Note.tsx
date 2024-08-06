@@ -7,7 +7,7 @@ import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
 import { handleDelete } from "@/lib/utils/data/sideNotes/book/deleteSideNotesBook";
-import Modal from "./Modal";
+import Modal from "../CreateNoteModal";
 import { extractHexColor } from "@/lib/utils/extractHexColor";
 
 interface SideNote {

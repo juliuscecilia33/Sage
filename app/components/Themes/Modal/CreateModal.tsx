@@ -3,7 +3,7 @@ import { MdClose } from "react-icons/md";
 import { FaRegEdit, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 import { postTheme } from "@/lib/utils/data/themes/postTheme";
-import ThemeInModal from "./ThemeInModal";
+import ThemeInModal from "./child_components/Theme";
 
 interface ThemeData {
   userId: string;

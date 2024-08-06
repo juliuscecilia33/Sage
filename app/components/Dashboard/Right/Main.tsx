@@ -3,8 +3,8 @@ import { Dispatch, SetStateAction } from "react";
 
 import { IoIosCreate } from "react-icons/io";
 
-import Note from "../../SideNotes/Note";
-import Modal from "../../SideNotes/Modal";
+import Note from "../../SideNotes/Note/Note";
+import Modal from "../../SideNotes/CreateNoteModal";
 
 interface SideNote {
   id: string;
