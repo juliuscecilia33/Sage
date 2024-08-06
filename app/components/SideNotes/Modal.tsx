@@ -69,6 +69,9 @@ const Modal = ({
   const [selectedThemeName, setSelectedThemeName] = useState<string>(
     userThemes[0].name
   );
+  const [selectedThemeColor, setSelectedThemeColor] = useState<string>(
+    userThemes[0].themeColor
+  );
   const [isPrivate, setIsPrivate] = useState<boolean>(true);
   const [workspaceId, setwWorkspaceId] = useState<any>(null);
 
@@ -173,7 +176,9 @@ const Modal = ({
                 onClick={toggleDropdown}
                 className={`${paragraphFont.className} truncate mr-3 transition hover:border-[#956E60] hover:bg-[#FEF2EE] hover:text-[#956E60] flex justify-center items-center h-10 px-3 text-sm font-medium rounded bg-[#FBFCFD] text-[#B5B5B5]`}
               >
-                <div className="w-7 h-7 bg-blue-500 rounded mr-4"></div>
+                <div
+                  className={`w-7 h-7 ${selectedThemeColor} rounded mr-4`}
+                ></div>
                 {selectedThemeName}
                 {isOpen ? (
                   <FaChevronUp className="ml-2" />
@@ -184,7 +189,7 @@ const Modal = ({
               {isOpen && (
                 <div
                   id="dropdown"
-                  className={`z-10 absolute bottom-full mb-2 right-0 w-44 bg-white divide-y divide-gray-200 rounded-lg shadow-md transition-opacity duration-300 ease-in-out ${
+                  className={`z-10 absolute bottom-full mb-2 right-0 min-w-52 bg-white divide-y divide-gray-200 rounded-lg shadow-md transition-opacity duration-300 ease-in-out ${
                     isOpen ? "opacity-100 visible" : "opacity-0 invisible"
                   }`}
                   aria-labelledby="dropdownDefaultButton"
@@ -196,10 +201,14 @@ const Modal = ({
                           onClick={() => {
                             setUserTheme(theme.id);
                             setSelectedThemeName(theme.name);
+                            setSelectedThemeColor(theme.themeColor);
                             toggleDropdown();
                           }} // set userTheme to theme.id
-                          className="text-left w-full block px-4 py-2 hover:bg-gray-100"
+                          className="text-left w-full block px-4 py-2 hover:bg-gray-100 flex items-center"
                         >
+                          <div
+                            className={`w-5 h-5 ${theme.themeColor} rounded mr-4`}
+                          ></div>
                           {theme.name}
                         </button>
                       </li>
