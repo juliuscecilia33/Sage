@@ -20,6 +20,7 @@ interface SideNote {
 }
 
 interface ThemeData {
+  id: string;
   userId: string;
   name: string;
   description: string;

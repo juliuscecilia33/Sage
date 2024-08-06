@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { Dispatch, SetStateAction } from "react";
 import { handleDelete } from "@/lib/utils/data/sideNotes/book/deleteSideNotesBook";
 import Modal from "./Modal";
+import { extractHexColor } from "@/lib/utils/extractHexColor";
 
 interface SideNote {
   id: string;
@@ -52,16 +53,23 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
   // change formatted date to updated date
 
   return (
-    <div className="rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col border border-[#956E60] mb-3">
-      <div className="flex items-center justify-between">
+    <button
+      // style={{
+      //   border: `1px solid ${extractHexColor(noteData.theme.themeColor)}`,
+      // }}
+      className="drop-shadow-sm rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col mb-3"
+    >
+      <div className="flex items-center justify-between w-full">
         <div className="flex items-center">
-          <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+          <div
+            className={`w-3 h-3 ${noteData.theme.themeColor} rounded-sm mr-3`}
+          ></div>
           <p className="font-semibold">{noteData.title}</p>
         </div>
         <p className="text-[#B5B5B5] text-left font-light my-4">1:2</p>
       </div>
       <p>{noteData.description}</p>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center w-full">
         <p className="text-[#B5B5B5] text-xs font-light my-4">
           {formattedDate}
         </p>
@@ -91,7 +99,7 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
         prevNoteId={noteData.id}
         userThemes={userThemes}
       />
-    </div>
+    </button>
   );
 };
 
