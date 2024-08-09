@@ -41,14 +41,9 @@ const NoteModal = ({ onClose, show }: ModalProps) => {
   return (
     <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center z-50">
       <div className="mr-5 bg-[#F9F9FA] rounded-lg overflow-hidden shadow-xl transform transition-all w-3/5 p-16">
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mb-5">
           <div className={`flex items-center`}>
-            <h3 className="text-3xl font-bold text-[#11181C]">Note</h3>
-            <button
-              className={`${paragraphFont.className} ml-3 border border-[#956E60] flex justify-center items-center px-3 py-1.5 text-sm font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
-            >
-              Genesis
-            </button>
+            <h3 className="text-2xl font-bold text-black">Your Note</h3>
           </div>
           <button
             onClick={onClose}
@@ -56,6 +51,16 @@ const NoteModal = ({ onClose, show }: ModalProps) => {
           >
             <MdClose size={30} />
           </button>
+        </div>
+        <div className="flex w-full">
+          <div className="flex flex-col w-1/4 mr-10">
+            <button
+              className={`${paragraphFont.className} ml-3 border border-[#956E60] flex justify-center items-center px-3 py-1.5 text-sm font-medium rounded font-archivo bg-[#FEF2EE] text-[#956E60]`}
+            >
+              Genesis
+            </button>
+          </div>
+          <div className="flex flex-col w-3/4"></div>
         </div>
       </div>
     </div>
