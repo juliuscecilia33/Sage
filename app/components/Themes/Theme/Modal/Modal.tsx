@@ -100,24 +100,24 @@ const ThemeModal = ({ onClose, show }: ModalProps) => {
                 07/31/2024
               </p>
             </div>
-            <div className="w-full flex justify-between">
+            <div className="w-full flex justify-left items-center">
               <button
                 onClick={() => {}}
-                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+                className="rounded-lg w-12 h-12 mr-5 flex justify-center items-center bg-white"
               >
-                <FaRegEdit className="text-[#B5B5B5]" size={25} />
+                <FaRegEdit className="text-[#B5B5B5]" size={20} />
               </button>
               <button
                 onClick={() => {}}
-                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+                className="rounded-lg w-12 h-12 mr-5 flex justify-center items-center bg-white"
               >
-                <FaRegTrashCan className="text-[#B5B5B5]" size={25} />
+                <FaRegTrashCan className="text-[#B5B5B5]" size={20} />
               </button>
               <button
                 onClick={() => {}}
-                className="rounded-lg w-20 h-20 flex justify-center items-center bg-white"
+                className="rounded-lg w-12 h-12 flex justify-center items-center bg-white"
               >
-                <FaEye className="text-[#B5B5B5]" size={25} />
+                <FaEye className="text-[#B5B5B5]" size={20} />
               </button>
             </div>
           </div>
