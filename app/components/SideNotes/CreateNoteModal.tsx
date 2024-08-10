@@ -65,7 +65,7 @@ const Modal = ({
   const [book, setBook] = useState("");
   const [chapter, setChapter] = useState<number>(0);
   const [verse, setVerse] = useState<number>(0);
-  const [userTheme, setUserTheme] = useState<string>("");
+  const [userTheme, setUserTheme] = useState<string>(userThemes[0].id);
   const [selectedThemeName, setSelectedThemeName] = useState<string>(
     userThemes[0].name
   );

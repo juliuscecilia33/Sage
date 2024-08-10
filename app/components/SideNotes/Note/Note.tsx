@@ -74,7 +74,7 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
             <button className="mr-2 text-[#B5B5B5]">
               <IoLocate size={20} />
             </button>
-            <button onClick={openModal} className="mr-2 text-[#B5B5B5]">
+            <button className="mr-2 text-[#B5B5B5]">
               <MdModeEditOutline size={20} />
             </button>
             <button

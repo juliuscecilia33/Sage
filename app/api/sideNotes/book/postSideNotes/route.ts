@@ -29,6 +29,9 @@ export async function POST(request: Request) {
         isPrivate,
         workspaceId,
       },
+      include: {
+        theme: true,
+      },
     });
     return NextResponse.json({ newSideNote }, { status: 201 });
   } catch (error) {
