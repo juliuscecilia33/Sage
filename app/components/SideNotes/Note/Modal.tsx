@@ -36,9 +36,11 @@ interface ModalProps {
   userThemes: ThemeData[];
   prevTitle: string;
   prevDescription: string;
-  prevNoteId: string;
-  prevThemeId: string;
+  noteId: string;
+  previousThemeId: string;
   previousNotes: any;
+  dateCreated: string;
+  previousThemeColor: string;
 }
 
 const NoteModal = ({
@@ -47,9 +49,11 @@ const NoteModal = ({
   userThemes,
   prevTitle,
   prevDescription,
-  prevNoteId,
-  prevThemeId,
+  noteId,
+  previousThemeId,
   previousNotes,
+  dateCreated,
+  previousThemeColor,
 }: ModalProps) => {
   if (!show) return null;
 

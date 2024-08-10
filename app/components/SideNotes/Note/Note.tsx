@@ -83,9 +83,21 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
           </div>
         </div>
       </div>
-      <NoteModal show={showModal} onClose={closeModal} />
+      <NoteModal
+        prevTitle={noteData.title}
+        prevDescription={noteData.description}
+        userThemes={userThemes}
+        show={showModal}
+        onClose={closeModal}
+        dateCreated={formattedDate}
+        previousThemeColor={noteData.theme.themeColor}
+        noteId={noteData.id}
+        previousThemeId={noteData.theme.id}
+        previousNotes={previousNotes}
+      />
     </>
   );
 };
 
+// Store the props for NoteModal and this component; make it look nicer
 export default Note;
