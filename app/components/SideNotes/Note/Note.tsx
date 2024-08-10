@@ -52,10 +52,7 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
 
   return (
     <>
-      <button
-        onClick={openModal}
-        className="drop-shadow-sm rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col mb-3"
-      >
+      <div className="drop-shadow-sm rounded text-black w-full px-4 bg-[#FBFCFD] flex flex-col mb-3">
         <div className="flex items-center justify-between w-full">
           <div className="flex items-center">
             <div
@@ -74,7 +71,7 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
             <button className="mr-2 text-[#B5B5B5]">
               <IoLocate size={20} />
             </button>
-            <button className="mr-2 text-[#B5B5B5]">
+            <button onClick={openModal} className="mr-2 text-[#B5B5B5]">
               <MdModeEditOutline size={20} />
             </button>
             <button
@@ -85,7 +82,7 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
             </button>
           </div>
         </div>
-      </button>
+      </div>
       <NoteModal show={showModal} onClose={closeModal} />
     </>
   );
