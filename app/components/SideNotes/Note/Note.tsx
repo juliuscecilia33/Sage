@@ -24,6 +24,7 @@ interface SideNote {
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
 interface ThemeData {
+  id: string;
   userId: string;
   name: string;
   description: string;
@@ -84,16 +85,12 @@ const Note = ({ noteData, previousNotes, setNotes, userThemes }: any) => {
         </div>
       </div>
       <NoteModal
-        prevTitle={noteData.title}
-        prevDescription={noteData.description}
         userThemes={userThemes}
         show={showModal}
         onClose={closeModal}
         dateCreated={formattedDate}
-        previousThemeColor={noteData.theme.themeColor}
-        noteId={noteData.id}
-        previousThemeId={noteData.theme.id}
-        previousNotes={previousNotes}
+        setNotes={setNotes}
+        noteData={noteData}
       />
     </>
   );

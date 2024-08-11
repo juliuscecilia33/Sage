@@ -1,9 +1,11 @@
 import { useState, Dispatch, SetStateAction } from "react";
 import { MdClose } from "react-icons/md";
 import { paragraphFont } from "@/lib/utils/fonts";
-import { FaRegEdit } from "react-icons/fa";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
+import { editSideNotesBook } from "@/lib/utils/data/sideNotes/book/editSideNotesBook";
+import { useCurrentBookDataContext } from "@/app/context/CurrentBookData";
 
 interface SideNote {
   id: string;
@@ -16,6 +18,7 @@ interface SideNote {
   workspaceId: string;
   createdAt: Date;
   updatedAt: Date;
+  theme: ThemeData;
 }
 
 interface ThemeData {
@@ -30,35 +33,53 @@ interface ThemeData {
 
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
+interface SideNote {
+  id: string;
+  title: string;
+  description: string;
+  book: string;
+  verse: string;
+  userTheme: string;
+  isPrivate: boolean;
+  workspaceId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 interface ModalProps {
   onClose: () => void;
   show: boolean;
   userThemes: ThemeData[];
-  prevTitle: string;
-  prevDescription: string;
-  noteId: string;
-  previousThemeId: string;
-  previousNotes: any;
   dateCreated: string;
-  previousThemeColor: string;
+  noteData: SideNote;
+  setNotes: SetSideNotesBook;
 }
 
 const NoteModal = ({
   onClose,
   show,
   userThemes,
-  prevTitle,
-  prevDescription,
-  noteId,
-  previousThemeId,
-  previousNotes,
   dateCreated,
-  previousThemeColor,
+  noteData,
+  setNotes,
 }: ModalProps) => {
   if (!show) return null;
+  const { userId } = useCurrentBookDataContext();
 
-  const [title, setTitle] = useState(prevTitle);
-  const [description, setDescription] = useState(prevDescription);
+  const [title, setTitle] = useState(noteData.title);
+  const [description, setDescription] = useState(noteData.description);
+  const [isOpen, setIsOpen] = useState(false);
+  const [userTheme, setUserTheme] = useState<string>(noteData.theme.id);
+  const [selectedThemeName, setSelectedThemeName] = useState<string>(
+    noteData.theme.name
+  );
+  const [selectedThemeColor, setSelectedThemeColor] = useState<string>(
+    noteData.theme.themeColor
+  );
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
 
   const handleEditSubmit = async (
     event: React.MouseEvent<HTMLButtonElement>
