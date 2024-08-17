@@ -244,6 +244,21 @@ const NoteModal = ({
             </div>
           </div>
         </div>
+        <div className="w-full mt-10 flex justify-between items-center">
+          <button
+            type="button"
+            onClick={onClose}
+            className="transition mr-2 inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-gray-700 bg-gray-100 hover:bg-gray-200"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleEditSubmit}
+            className="transition inline-flex justify-center py-3 px-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#956E60] hover:bg-[#7F5C4F]"
+          >
+            Apply Changes
+          </button>
+        </div>
       </div>
     </div>
   );

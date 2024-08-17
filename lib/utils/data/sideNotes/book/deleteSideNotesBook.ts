@@ -17,7 +17,7 @@ interface SideNote {
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
 
 export const handleDelete = async (
-  id: String,
+  id: string,
   setSideNotesBook: SetSideNotesBook
 ) => {
   try {
