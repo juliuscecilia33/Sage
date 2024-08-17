@@ -12,7 +12,7 @@ interface SideNote {
   title: string;
   description: string;
   book: string;
-  verse: string;
+  verse: number;
   userTheme: string;
   isPrivate: boolean;
   workspaceId: string;
@@ -32,19 +32,6 @@ interface ThemeData {
 }
 
 type SetSideNotesBook = Dispatch<SetStateAction<SideNote[]>>;
-
-interface SideNote {
-  id: string;
-  title: string;
-  description: string;
-  book: string;
-  verse: string;
-  userTheme: string;
-  isPrivate: boolean;
-  workspaceId: string;
-  createdAt: Date;
-  updatedAt: Date;
-}
 
 interface ModalProps {
   onClose: () => void;
@@ -66,6 +53,8 @@ const NoteModal = ({
   if (!show) return null;
   const { userId } = useCurrentBookDataContext();
 
+  const prevNoteId = noteData.id;
+
   const [title, setTitle] = useState(noteData.title);
   const [description, setDescription] = useState(noteData.description);
   const [isOpen, setIsOpen] = useState(false);
@@ -73,6 +62,10 @@ const NoteModal = ({
   const [selectedThemeName, setSelectedThemeName] = useState<string>(
     noteData.theme.name
   );
+  const [workspaceId, setWorkspaceId] = useState<string>(noteData.workspaceId);
+  const [book, setBook] = useState(noteData.book);
+  const [verse, setVerse] = useState(noteData.verse);
+  const [isPrivate, setIsPrivate] = useState<boolean>(noteData.isPrivate);
   const [selectedThemeColor, setSelectedThemeColor] = useState<string>(
     noteData.theme.themeColor
   );
@@ -91,7 +84,6 @@ const NoteModal = ({
       title,
       description,
       book,
-      chapter,
       verse,
       userTheme,
       isPrivate,

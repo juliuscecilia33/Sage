@@ -6,7 +6,7 @@ interface SideNote {
   title: string;
   description: string;
   book: string;
-  verse: string;
+  verse: number;
   userTheme: string;
   isPrivate: boolean;
   workspaceId: string;
